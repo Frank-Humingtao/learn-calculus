@@ -242,7 +242,14 @@ def cmd_show(a):
     card = [c for c in load_cards() if c["id"] == a.id]
     if card:
         print("卡片：%s" % card[0]["path"])
-    print(gh("issue", "view", n, "--comments"))
+    d = gh_json("issue", "view", n, "--json", "url,state,labels,comments")
+    labels = {l["name"] for l in d["labels"]}
+    print("issue：%s\n状态：%s  label：%s\n" % (
+        d["url"], ICON[status_of(d["state"], labels)], ", ".join(sorted(labels)) or "无"))
+    if not d["comments"]:
+        print("（还没有学习记录）")
+    for c in d["comments"]:
+        print("—— %s ——\n%s\n" % (c["createdAt"][:10], c["body"]))
 
 
 def cmd_set(a):
