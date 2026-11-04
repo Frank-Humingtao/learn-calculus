@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.DS_Store
+course/sources/*
+!course/sources/README.md
+course/clips/
