@@ -6,7 +6,8 @@
   status [--all]              进度总览 + 推荐下一关
   show <id>                   卡片路径、issue 状态、历史评论
   set <id> start|review|done|todo
-  label <id> skip|startpoint|clear     摸底标注
+  label <id> skip|startpoint|clear     摸底标注（skip 为旧用法，新摸底不再使用）
+  clear-labels <单元号>                清掉该单元所有关卡的摸底标注
   comment <id> < record.md    在 issue 下追加一条学习/测试记录
 
 状态：未开始=open 无状态 label；进行中=label「进行中」；待复习=label「待复习」；已掌握=closed
@@ -280,6 +281,25 @@ def cmd_label(a):
     print("✓ %s 摸底标注 → %s" % (a.id, a.kind))
 
 
+def cmd_clear_labels(a):
+    unit = a.unit.zfill(2)
+    mp = load_map()
+    ids = [c["id"] for c in load_cards() if c["id"].split("-")[0] == unit]
+    if not ids:
+        sys.exit("没有单元 %s 的关卡" % unit)
+    states = fetch_states()
+    n_cleared = 0
+    for tid in ids:
+        n = mp.get(tid)
+        if n is None:
+            continue
+        labels = states.get(n, ("", set()))[1]
+        if labels & {L_SKIP, L_START}:
+            gh("issue", "edit", str(n), "--remove-label", L_SKIP + "," + L_START)
+            n_cleared += 1
+    print("✓ 单元 %s：清掉 %d 关的摸底标注" % (unit, n_cleared))
+
+
 def cmd_comment(a):
     body = sys.stdin.read().strip()
     if not body:
@@ -298,6 +318,7 @@ def main():
     p.set_defaults(f=cmd_set)
     p = sub.add_parser("label"); p.add_argument("id"); p.add_argument("kind", choices=["skip", "startpoint", "clear"])
     p.set_defaults(f=cmd_label)
+    p = sub.add_parser("clear-labels"); p.add_argument("unit"); p.set_defaults(f=cmd_clear_labels)
     p = sub.add_parser("comment"); p.add_argument("id"); p.set_defaults(f=cmd_comment)
     a = ap.parse_args()
     a.f(a)

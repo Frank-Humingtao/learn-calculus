@@ -7,7 +7,7 @@
 | 阶段 | skill | 什么时候用 |
 |---|---|---|
 | 备课 | `learn-prep` | 学习者放了新素材；或要重新梳理框架 |
-| 摸底 | `learn-diagnose` | 框架和 issue 建好后，开始学之前；或某单元重新摸底 |
+| 摸底 | `learn-diagnose` | 全课摸底：框架和 issue 建好后做一次；单元摸底：每个单元开学前（闯关时会提议） |
 | 闯关 | `learn-level` | “开始学”“打下一关”“学 X” |
 | 测试 | `learn-test` | 学习者要测某一关，或打某单元的 boss 关 |
 | 进度 | `learn-progress` | “我学到哪了”“这关我懂了”“改回待复习” |
@@ -57,6 +57,7 @@ python3 scripts/tracker.py publish [--dry-run]  # 卡片 → milestone + issue
 python3 scripts/tracker.py status [--all]       # 进度总览 + 推荐
 python3 scripts/tracker.py show <id>            # 卡片路径、状态、历史评论
 python3 scripts/tracker.py set <id> start|review|done|todo
-python3 scripts/tracker.py label <id> skip|startpoint|clear   # 摸底标注
+python3 scripts/tracker.py label <id> startpoint|clear        # 摸底标注（skip 为旧用法）
+python3 scripts/tracker.py clear-labels <单元号>               # 清掉某单元全部摸底标注
 python3 scripts/tracker.py comment <id> < record.md
 ```

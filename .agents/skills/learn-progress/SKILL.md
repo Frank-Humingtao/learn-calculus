@@ -10,7 +10,7 @@ description: 查看与修改学习进度：总览、推荐下一关、按学习�
 | 学习者说 | 做 |
 |---|---|
 | 学到哪了 / 下一步 | `python3 scripts/tracker.py status`（`--all` 含已掌握），用两三句话总结：完成比例、进行中、待复习，再给推荐 |
-| X 我懂了 | `tracker.py set <id> done`；说的是一整个单元就对该单元每关执行 |
+| X 我懂了 / X 跳过 | `tracker.py set <id> done`；说的是一整个单元就对该单元每关执行 |
 | X 没懂 / 要复习 | `tracker.py set <id> review` |
 | X 重来 | `tracker.py set <id> todo` |
 | X 的记录 | `tracker.py show <id>` |
