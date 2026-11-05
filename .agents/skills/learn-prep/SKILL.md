@@ -19,7 +19,7 @@ description: 备课：把 course/sources/ 里的视频和 PDF 提取成文字与
 | 视频 | `python3 scripts/extract_video.py <视频> [--lang en]`（同名 .srt/.vtt 会自动使用；没有字幕就本地转写，很慢，放后台跑） | `course/extracted/<名>.transcript.md` |
 | 视频 | `python3 scripts/keyframes.py <视频>` | `course/frames/<名>/` |
 
-PDF 若提示扫描版：告诉学习者需要 MinerU（`pip install mineru` 后 `mineru -p <pdf> -o course/extracted/<名>/`），征得同意再装；少量页可直接用读图能力读 PDF 页面。
+PDF 若提示扫描版，或抽查发现文字层是乱码（中文缺失、公式错乱）：改用 `python3 scripts/ocr_pdf.py <pdf 或目录>`（MinerU 本地 OCR，产物格式相同，页标记带印刷页码 `<!-- page N | p.105 -->`，约 7 秒/页，放后台跑）。没装 MinerU 时先征得学习者同意：它要 Python ≥ 3.10，用 `uv tool install --python 3.12 'mineru[all]'` 装，模型用 `mineru-kit models download --tier standard --source modelscope` 下。少量页可直接用读图能力读 PDF 页面。
 抽查每个产物开头和中间一段，确认不是乱码。
 
 ## 2. 逐份摘要 → `course/prep/<名>.md`

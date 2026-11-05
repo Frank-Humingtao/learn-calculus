@@ -47,6 +47,7 @@ course/
 
 ```bash
 python3 scripts/extract_pdf.py course/sources/<书>.pdf
+python3 scripts/ocr_pdf.py course/sources/<书>.pdf|<目录>   # 扫描版：MinerU 本地 OCR
 python3 scripts/extract_video.py course/sources/<课>.mp4 [--subs <字幕.srt>] [--lang en]
 python3 scripts/keyframes.py course/sources/<课>.mp4
 python3 scripts/clip.py course/sources/<课>.mp4 00:12:30 00:18:00     # 切片段并打开
