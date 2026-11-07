@@ -8,27 +8,30 @@
   set <id> start|review|done|todo
   label <id> skip|startpoint|clear     摸底标注（skip 为旧用法，新摸底不再使用）
   clear-labels <单元号>                清掉该单元所有关卡的摸底标注
-  comment <id> < record.md    在 issue 下追加一条学习/测试记录
+  comment <id> < record.md    在 issue 下追加一条学习/测试记录（或 --file record.md）
+  erratum <id> < note.md      记一条卡片勘误：打「卡片勘误」label 并评论（或 --file note.md）
+  erratum <id> --fixed        勘误已在卡片里改好：去掉 label
 
 状态：未开始=open 无状态 label；进行中=label「进行中」；待复习=label「待复习」；已掌握=closed
 关卡 id 与 issue 编号的对应保存在 course/issues.json。
+set start 会在 issue 下留一条带设备名的评论（设备名见 .learn-device，缺省 hostname），status 据此显示谁在学。
 """
 import argparse
 import glob
 import json
 import os
 import re
-import shutil
-import subprocess
 import sys
 
-from common import COURSE, LEVELS, ROOT
+from common import COURSE, LEVELS, ROOT, device_name, find_gh, run, utf8_stdio
 
 ISSUES_JSON = os.path.join(COURSE, "issues.json")
 
 L_DOING, L_REVIEW = "进行中", "待复习"
 L_SKIP, L_START = "摸底:可跳过", "摸底:从这开始"
 L_LEVEL, L_BOSS = "关卡", "boss"
+L_ERRATUM = "卡片勘误"
+START_MARK = "🟡 开始闯关 · 设备："
 LABELS = {
     L_LEVEL: ("ededed", "一个关卡"),
     L_BOSS: ("b60205", "单元阶段测试"),
@@ -36,25 +39,21 @@ LABELS = {
     L_REVIEW: ("d93f0b", "需要复习"),
     L_SKIP: ("0e8a16", "摸底显示可能已掌握"),
     L_START: ("1d76db", "摸底显示从这里开始"),
+    L_ERRATUM: ("5319e7", "卡片有错，等下次备课修正"),
 }
 ICON = {"done": "✅", "doing": "🟡", "review": "🔁", "todo": "⬜"}
 
 
 # ---------- gh ----------
 
-def gh_path():
-    exe = shutil.which("gh") or os.path.expanduser("~/.local/bin/gh")
-    if not os.path.exists(exe):
-        sys.exit("找不到 gh：先运行 bash scripts/setup.sh")
-    return exe
-
-
 def gh(*args, input=None, check=True):
-    p = subprocess.run([gh_path()] + list(args), cwd=ROOT, input=input, text=True,
-                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if check and p.returncode != 0:
-        sys.exit("gh %s 失败：%s" % (" ".join(args[:3]), p.stderr.strip()))
-    return p.stdout
+    exe = find_gh()
+    if not exe:
+        sys.exit("找不到 gh：先配环境（python3 scripts/doctor.py 看缺什么）")
+    code, out, err = run([exe] + list(args), input=input)
+    if check and code != 0:
+        sys.exit("gh %s 失败：%s" % (" ".join(args[:3]), err.strip()))
+    return out
 
 
 def gh_json(*args):
@@ -195,6 +194,15 @@ def status_of(state, labels):
     return "todo"
 
 
+def last_device(n):
+    """该 issue 最近一条开始闯关评论里的设备名"""
+    d = gh_json("issue", "view", str(n), "--json", "comments")
+    for c in reversed(d["comments"]):
+        if c["body"].startswith(START_MARK):
+            return c["body"][len(START_MARK):].split()[0]
+    return ""
+
+
 def cmd_status(a):
     cards = load_cards()
     mp = load_map()
@@ -231,6 +239,13 @@ def cmd_status(a):
         if m == len(ucards) and bs != "done":
             recs["boss"].append({"id": key + "-boss", "title": "BOSS · " + unit})
     print("\n总进度：%d/%d（%.0f%%）" % (done, total, 100.0 * done / total if total else 0))
+    for i, c in enumerate(recs["doing"]):
+        who = last_device(mp[c["id"]])
+        if who:
+            recs["doing"][i] = dict(c, title="%s（在 %s 上开始）" % (c["title"], who))
+    errata = sorted(tid for tid, n in mp.items() if L_ERRATUM in states.get(n, ("", set()))[1])
+    if errata:
+        print("待修卡片勘误：%s" % ", ".join(errata))
     order = recs["doing"] + recs["review"] + recs["boss"] + recs["start"] + recs["ready"]
     if order:
         print("\n建议下一步：")
@@ -258,6 +273,7 @@ def cmd_set(a):
     if a.to == "start":
         gh("issue", "reopen", n, check=False)
         gh("issue", "edit", n, "--add-label", L_DOING, "--remove-label", L_REVIEW)
+        gh("issue", "comment", n, "--body", START_MARK + device_name())
     elif a.to == "review":
         gh("issue", "reopen", n, check=False)
         gh("issue", "edit", n, "--add-label", L_REVIEW, "--remove-label", L_DOING)
@@ -300,14 +316,39 @@ def cmd_clear_labels(a):
     print("✓ 单元 %s：清掉 %d 关的摸底标注" % (unit, n_cleared))
 
 
+def read_body(a):
+    """--file 优先（Windows PowerShell 管道会把中文弄乱），否则读标准输入"""
+    if a.file:
+        with open(a.file, encoding="utf-8-sig") as f:
+            return f.read().strip()
+    return sys.stdin.read().strip()
+
+
 def cmd_comment(a):
-    body = sys.stdin.read().strip()
+    body = read_body(a)
     if not body:
         sys.exit("评论内容为空（从标准输入传入）")
     print(gh("issue", "comment", issue_no(a.id), "--body-file", "-", input=body).strip())
 
 
+def cmd_erratum(a):
+    n = issue_no(a.id)
+    if a.fixed:
+        gh("issue", "edit", n, "--remove-label", L_ERRATUM)
+        print("✓ %s 的卡片勘误已清除" % a.id)
+        return
+    body = read_body(a)
+    if not body:
+        sys.exit("勘误内容为空（从标准输入传入：哪里错、应改成什么）")
+    gh("label", "create", L_ERRATUM, "--color", LABELS[L_ERRATUM][0],
+       "--description", LABELS[L_ERRATUM][1], check=False)
+    gh("issue", "edit", n, "--add-label", L_ERRATUM)
+    body = "📝 **卡片勘误**（设备：%s）\n\n%s" % (device_name(), body)
+    print(gh("issue", "comment", n, "--body-file", "-", input=body).strip())
+
+
 def main():
+    utf8_stdio()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("setup").set_defaults(f=cmd_setup)
@@ -319,7 +360,9 @@ def main():
     p = sub.add_parser("label"); p.add_argument("id"); p.add_argument("kind", choices=["skip", "startpoint", "clear"])
     p.set_defaults(f=cmd_label)
     p = sub.add_parser("clear-labels"); p.add_argument("unit"); p.set_defaults(f=cmd_clear_labels)
-    p = sub.add_parser("comment"); p.add_argument("id"); p.set_defaults(f=cmd_comment)
+    p = sub.add_parser("comment"); p.add_argument("id"); p.add_argument("--file"); p.set_defaults(f=cmd_comment)
+    p = sub.add_parser("erratum"); p.add_argument("id"); p.add_argument("--fixed", action="store_true"); p.add_argument("--file")
+    p.set_defaults(f=cmd_erratum)
     a = ap.parse_args()
     a.f(a)
 
