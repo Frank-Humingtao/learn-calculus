@@ -23,6 +23,10 @@ prereqs: [03-06, 01-05]
 - ✏️ 练习：同上 第 45、49、51、56 题（对数求导法）（覆盖 3、4）
 - ✏️ 挑战（可选）：第 61 题用导数定义证明 $\lim_{x\to0}\frac{\ln(1+x)}{x}=1$，第 62 题证明 $\lim_{n\to\infty}(1+\frac xn)^n=e^x$；第 87 题 $f(x)^{g(x)}$ 的一般公式（覆盖 4）
 - 💬 对话要点：从“$\ln x$ 是 $e^x$ 的反函数”入手，让学习者把 $y=\ln x$ 改写成 $e^y=x$ 后自己隐式求导，体会上一关方法的复用。重点追问 $x^x$：“它是幂函数还是指数函数？两条法则能直接套吗？”逼出对数求导法。检验时给 $\ln\frac{x+1}{\sqrt{x-2}}$，看他会不会先拆开。（覆盖 1、2、3）
+- 🎬 MIT 18.01 第 6 讲：视频 [19:49–21:43](https://www.bilibili.com/video/BV1mNgm66EZu?p=6&t=1189)；[26:39–37:10](https://www.bilibili.com/video/BV1mNgm66EZu?p=6&t=1599)；讲义 Natural log、Method 2、Example 1–2（讲义 `course/extracted/mit1801/L06/OCW_18.01_L06_讲义_中文.md`，摘要 `course/prep/mit1801-L06.md`）——标准 1（隐式求 $(\ln x)'$）、3（$x^x$ 对数微分）、4（$e$ 的极限由 $(\ln x)'|_{x=1}=1$ 得到，完全吻合）
+- 🎬 MIT 18.01 第 7 讲：视频 [00:30–08:30](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=30)；[20:57–21:30](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=1257)（讲义 `course/extracted/mit1801/L07/OCW_18.01_L07_讲义_中文.md`，摘要 `course/prep/mit1801-L07.md`）——标准 3、4；任意实数 $n$ 的幂法则两法证明、$\ln\sec x$ 例、$e$ 的极限双向读
+- 🎬 MIT 18.01 第 9 讲：视频 [12:16–14:49](https://www.bilibili.com/video/BV1mNgm66EZu?p=9&t=736)（讲义 `course/extracted/mit1801/L09/OCW_18.01_L09_讲义_中文.md`，摘要 `course/prep/mit1801-L09.md`）——03-07 标准 4、04-06（$1^\infty$ 型）：用 $\ln(1+x)\approx x$ 一行重算 $(1+1/k)^k\to e$
+- 🎬 MIT 18.01 第 19 讲：视频 [01:04–11:41](https://www.bilibili.com/video/BV1mNgm66EZu?p=19&t=64)；讲义 Application to Logarithms（讲义 `course/extracted/mit1801/L19/OCW_18.01_L19_讲义_中文.md`，摘要 `course/prep/mit1801-L19.md`）——补充：$(\ln x)'=\frac1x$ 的另一种来历（直接作定义）；$L(ab)=L(a)+L(b)$ 由积分推出
 
 ## 常见误区
 - $\frac{d}{dx}\ln10$ 写成 $\frac1{10}$，忘了它是常数（复习判断题专门考）。
@@ -34,6 +38,7 @@ prereqs: [03-06, 01-05]
 - OCR 错误：例 4 的 $\log_{10}$ 被识别成 $\log_0$，引用时以原 PDF 为准。
 - 与 01-05 衔接：对数运算法则若已遗忘，先花一两分钟复习 $\ln(ab)$、$\ln(a/b)$、$\ln a^r$。
 - 公式 6 的 $(1+\frac1n)^n$ 会在 03-10 的连续复利中再用到。
+- （18.01）18.01 有两种 $\ln$ 的讲法：L06 把 $\ln$ 当 $e^x$ 的反函数（与斯图尔特一致），L19 改用 $\int_1^x\frac{dt}t$ 定义。后者可以在 05-06 之后作为补充回看。
 
 ## 后续
 03-08

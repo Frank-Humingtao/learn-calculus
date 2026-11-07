@@ -1,0 +1,8 @@
+lec30.pdf Integration by Parts / Reduction Formulae pages (ocw_pages/page-2.png … page-4.png
+= notes pp.1–3) have no diagram/figure callouts — pure text/equations.
+
+Arc Length / Parametric figures (Figure 1–8) appear later in the same lec30.pdf packet
+(ocw_pages/page-5.png … page-9.png = notes pp.4–8) but belong to the next topic, not this
+lecture’s Integration by Parts body. Per deliver brief: do not crop them into ocw_figs/.
+
+No crops placed in ocw_figs/.

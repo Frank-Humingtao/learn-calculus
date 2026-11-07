@@ -20,6 +20,13 @@ prereqs: [05-06]
 - 📖 阅读：§6.5 p.473–475 `course/sources/stewart9/061 06 积分的应用 - 6.05 函数的平均值.pdf`（文字版 `course/extracted/061 06 积分的应用 - 6.05 函数的平均值.md`），重点 图 6-5-1 与平均值推导 p.473（覆盖 1）；例 1–2 p.473–474（覆盖 2）；积分的中值定理与图 6-5-2 p.474、例 3 p.474–475（覆盖 3、4）
 - ✏️ 练习：§6.5 习题 p.475–476：第 1–8 题中选 2 题（含换元，覆盖 2）；第 9–12 题中选 1 题（求 $c$ 并画等面积矩形，覆盖 2、3）；第 15 或 16 题（读图，何时瞬时速度 = 平均速度，覆盖 3、4）；第 25 题（上凹函数 $f_{\mathrm{avg}}>f(\frac{a+b}2)$，覆盖 4）；第 28 题（证明积分的中值定理，选做，覆盖 3）
 - 💬 对话要点：先问“一天的平均气温怎么算？测得越来越密会怎样？”，让学习者自己写出 $\frac1n\sum f(x_i^*)$，再提示 $n=\frac{b-a}{\Delta x}$ 把它变成黎曼和。关键追问：$f_{\mathrm{avg}}$ 一定能被函数取到吗？如果 $f$ 不连续呢？检验时让他对 $F(x)=\int_a^xf$ 用导数中值定理，自己推出积分的中值定理。
+- 🎬 MIT 18.01 第 18 讲：视频 [01:50–07:38](https://www.bilibili.com/video/BV1mNgm66EZu?p=18&t=110)（讲义 `course/extracted/mit1801/L18/OCW_18.01_L18_讲义_中文.md`，摘要 `course/prep/mit1801-L18.md`）——标准 3、4（平均变化率 = 导数的平均值，积分中值定理与 MVT 是同一件事）；注意 L19 开场更正了这里漏掉的"除以长度"
+- 🎬 MIT 18.01 第 19 讲：视频 [00:15–01:03](https://www.bilibili.com/video/BV1mNgm66EZu?p=19&t=15)（讲义 `course/extracted/mit1801/L19/OCW_18.01_L19_讲义_中文.md`，摘要 `course/prep/mit1801-L19.md`）——标准 1（平均值必须除以 $b-a$）
+- 🎬 MIT 18.01 第 21 讲：视频 [00:14–05:05](https://www.bilibili.com/video/BV1mNgm66EZu?p=21&t=14)；讲义开篇 + Example 1–2（讲义 `course/extracted/mit1801/L21/OCW_18.01_L21_讲义_中文.md`，摘要 `course/prep/mit1801-L21.md`）——标准 1；用“常数的平均必须是常数”解释 $\frac1{b-a}$，比“测温度求平均”多一层检验
+- 🎬 MIT 18.01 第 21 讲：视频 [05:06–14:18](https://www.bilibili.com/video/BV1mNgm66EZu?p=21&t=306)；讲义 Example 3 / fig3（讲义 `course/extracted/mit1801/L21/OCW_18.01_L21_讲义_中文.md`，摘要 `course/prep/mit1801-L21.md`）——增量：“对哪个变量平均”（$\pi/4$ 与 $2/\pi$），斯图尔特没有；“区间越长平均越大吗”这一问可直接拿来作追问
+- 🎬 MIT 18.01 第 21 讲：视频 [14:19–18:06](https://www.bilibili.com/video/BV1mNgm66EZu?p=21&t=859)（讲义 `course/extracted/mit1801/L21/OCW_18.01_L21_讲义_中文.md`，摘要 `course/prep/mit1801-L21.md`）——增量：加权平均（斯图尔特第 6 章没有一般的加权平均），可作 06-06 的拓展段
+- 🎬 MIT 18.01 第 24 讲：回扣 L21：$\frac12\int_{-1}^1\sqrt{1-x^2}dx=\pi/4$ 当时只能靠几何，本讲给出原函数（讲义 `course/extracted/mit1801/L24/OCW_18.01_L24_讲义_中文.md`，摘要 `course/prep/mit1801-L24.md`）——前后呼应，可作为 07-03 的引入
+- 🎬 MIT 18.01 第 35 讲：讲义 Weighted Average 定义（讲义 `course/extracted/mit1801/L35/OCW_18.01_L35_讲义_中文.md`，摘要 `course/prep/mit1801-L35.md`）——补充：普通平均值是 $w\equiv1$ 的加权平均，可作为 06-06 的延伸追问
 
 ## 常见误区
 - 忘记除以 $b-a$
@@ -28,6 +35,7 @@ prereqs: [05-06]
 
 ## 导师注意
 - 平均值推导最后一行（p.473）OCR 把 $f(x_i^*)$ 误作 $f(x_n^*)$
+- （18.01）18.01 L21 课上口算的概率 $5/18$ 是错的，应为 $5/32$，引用时更正。
 
 ## 后续
 07-01

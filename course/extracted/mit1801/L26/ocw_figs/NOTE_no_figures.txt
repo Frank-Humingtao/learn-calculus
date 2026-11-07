@@ -1,0 +1,3 @@
+lec29.pdf (OCW Lecture 29: Partial Fractions) has no diagram/figure callouts.
+Rendered pages page-1.png … page-4.png are cover + 3 content pages of pure text/equations.
+No crops placed in ocw_figs/.

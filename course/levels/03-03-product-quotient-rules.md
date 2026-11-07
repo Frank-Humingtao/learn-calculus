@@ -24,6 +24,9 @@ prereqs: [03-01, 03-02]
 - ✏️ 练习：同上 第 45、46、49 题（由函数值求导数值）、第 37 题（切线与法线）（覆盖 4）
 - ✏️ 挑战（可选）：第 66 题倒数法则 $(1/g)'=-g'/g^2$，并用它证明负整数幂法则（覆盖 2）
 - 💬 对话要点：先让学习者自己猜 $(x\cdot x^2)'$ 是不是 $1\cdot2x$，对比真实答案 $3x^2$ 发现错误。然后画一个边长为 $u$、$v$ 的矩形，问“两边同时变长一点，面积多出哪几块”，让他自己说出三块。检验时给 $\frac{3x^2+2\sqrt x}{x}$，看他会不会先做除法。（覆盖 1、3）
+- 🎬 MIT 18.01 第 3 讲：视频 [36:01–38:04](https://www.bilibili.com/video/BV1mNgm66EZu?p=3&t=2161)；讲义 Product formula、Quotient formula、图 fig1（讲义 `course/extracted/mit1801/L03/OCW_18.01_L03_讲义_中文.md`，摘要 `course/prep/mit1801-L03.md`）——标准 1、2；讲义图 fig1 的矩形面积论证正对应 03-03 标准 1 的 $\Delta(uv)$ 解释；视频只陈述，证明见第 4 讲
+- 🎬 MIT 18.01 第 4 讲：视频 [01:52–12:55](https://www.bilibili.com/video/BV1mNgm66EZu?p=4&t=112)；L03 讲义 Product / Quotient formula、图 fig1（讲义 `course/extracted/mit1801/L04/OCW_18.01_L04_讲义_中文.md`，摘要 `course/prep/mit1801-L04.md`）——标准 1、2；完整的 $\Delta u,\Delta v$ 证明 + 三个真实板书困惑；注意 Jerison 的拆分是 $\Delta u\,v(x+\Delta x)+u\Delta v$，没有单独的 $\Delta u\Delta v$ 项，与 03-03 标准 1 的矩形三块写法要对照
+- 🎬 MIT 18.01 第 7 讲：视频 [17:01–19:19](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=1021)；讲义 General formulas（讲义 `course/extracted/mit1801/L07/OCW_18.01_L07_讲义_中文.md`，摘要 `course/prep/mit1801-L07.md`）——标准 2；用 $uv^{-1}$ 推商法则，避免分子顺序写错（注意斯图尔特 03-03 在链式之前，见下）
 
 ## 常见误区
 - 积的导数写成导数的积（教材明确提醒，旁注提到莱布尼茨当年也猜错过）。

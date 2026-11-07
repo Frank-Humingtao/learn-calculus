@@ -21,6 +21,9 @@ prereqs: [01-06]
 - 📖 阅读：p.687–691 例6 p.687–688（$r=2\cos\theta$）、例7 p.688（心脏线）、例8 p.688–689（四叶玫瑰线）、对称性规则 p.689、例9–10 p.690–691、表 10-3-2 p.691（覆盖 3、4）
 - ✏️ 练习：§10.3 习题 p.692–694 第 3、5 题（点的表示与互化）、第 9 题（不等式区域）、第 17、21 题（方程互化）、第 31 题（由 $r$–$\theta$ 图画曲线）、第 37、41 题（玫瑰线、蚶线作图）（覆盖 1、2、3、4）
 - 💬 对话要点：用“雷达屏幕”切入：先转到角度 $\theta$，再走距离 $r$；$r<0$ 就是“朝反方向退”。关键追问：$(-3,3\pi/4)$ 在第几象限？$\tan\theta=-1$ 时 $\theta$ 取 $-\pi/4$ 还是 $3\pi/4$？画四叶玫瑰线时让学习者按 $\theta$ 分段口述 $r$ 的增减和正负，并说出每段画在哪个象限。检验：给 $r=\sin3\theta$ 和 $r=\sin2\theta$，问各几叶、为什么。（覆盖 1、2、3、4）
+- 🎬 MIT 18.01 第 29 讲：视频 [22:03–32:03](https://www.bilibili.com/video/BV1mNgm66EZu?p=29&t=1323)；讲义 Example 1、4、5（讲义 `course/extracted/mit1801/L29/OCW_18.01_L29_讲义_中文.md`，摘要 `course/prep/mit1801-L29.md`）——标准 1、2：负 $r$、同一点多种表示、按象限选 $\theta$；雷达屏直观
+- 🎬 MIT 18.01 第 29 讲：视频 [32:04–38:41](https://www.bilibili.com/video/BV1mNgm66EZu?p=29&t=1924)；讲义 Example 2、6（讲义 `course/extracted/mit1801/L29/OCW_18.01_L29_讲义_中文.md`，摘要 `course/prep/mit1801-L29.md`）——标准 2：方程互化（$y=1$、$r=2a\cos\theta$），$\theta$ 范围恰好描一周
+- 🎬 MIT 18.01 第 30 讲：视频 [14:24–17:36](https://www.bilibili.com/video/BV1mNgm66EZu?p=30&t=864)（讲义 `course/extracted/mit1801/L30/OCW_18.01_L30_讲义_中文.md`，摘要 `course/prep/mit1801-L30.md`）——标准 3、4：按 $\theta$ 顺序画玫瑰线，过原点变号；叶数
 
 ## 常见误区
 - $r<0$ 时把点画在 $\theta$ 方向而不是反方向。

@@ -21,6 +21,10 @@ prereqs: [05-08, 03-04]
 - 📖 阅读：p.495–498 例5 p.495、例6 与策略框 p.496、$\int\sec x$ 公式与例7 p.497、例8 p.497–498、例9 p.498（覆盖 3、4）
 - ✏️ 练习：§7.2 习题 p.498–500 第 1、4、9 题（奇次/偶次幂，覆盖 1、2）；第 22、27、31 题（正切正割，覆盖 3）；第 43 题（积化和差，覆盖 4）；第 64 题（四种方法求 $\int\sin x\cos x\,dx$，覆盖 1）
 - 💬 对话要点：从“要令 $u=\sin x$，被积函数里得有一个 $\cos x\,dx$”这个需求倒推出拆因子的做法，让学习者自己归纳策略框，而不是先背表。追问：$\sin^2x\cos^2x$ 为什么没法拆？$\tan^2x\sec x$ 两条策略都不适用时怎么办（化成 $\sec^3x-\sec x$）？检验：给 3 个积分只让他说“留哪个因子、令 $u$ 为什么”。
+- 🎬 MIT 18.01 第 24 讲：视频 [00:59–05:13](https://www.bilibili.com/video/BV1mNgm66EZu?p=24&t=59)（讲义 `course/extracted/mit1801/L24/OCW_18.01_L24_讲义_中文.md`，摘要 `course/prep/mit1801-L24.md`）——半角公式的来历（由 $\cos2\theta$ 推出），作为标准 2 的预备
+- 🎬 MIT 18.01 第 24 讲：视频 [07:21–18:03](https://www.bilibili.com/video/BV1mNgm66EZu?p=24&t=441)；讲义 Method A、Example 1–2（讲义 `course/extracted/mit1801/L24/OCW_18.01_L24_讲义_中文.md`，摘要 `course/prep/mit1801-L24.md`）——标准 1：奇次拆因子的统一思想；“漏负号”的真实问答可作为常见误区示范
+- 🎬 MIT 18.01 第 24 讲：视频 [18:04–29:45](https://www.bilibili.com/video/BV1mNgm66EZu?p=24&t=1084)；讲义 Method B、Example 3（讲义 `course/extracted/mit1801/L24/OCW_18.01_L24_讲义_中文.md`，摘要 `course/prep/mit1801-L24.md`）——标准 2：偶次幂用半角公式，$\sin^2\cos^2$ 两种做法
+- 🎬 MIT 18.01 第 25 讲：视频 [00:45–12:11](https://www.bilibili.com/video/BV1mNgm66EZu?p=25&t=45)；讲义（L24）sec/tan 段（讲义 `course/extracted/mit1801/L25/OCW_18.01_L25_讲义_中文.md`，摘要 `course/prep/mit1801-L25.md`）——标准 3：$\tan^m\sec^n$ 的 sec 偶次情形（$\sec^4$），推导 $\int\sec$；增量：用对数导数推 $\int\sec$，比斯图尔特“乘 $\frac{\sec+\tan}{\sec+\tan}$”更有道理
 
 ## 常见误区
 - 奇次幂情形也去用半角公式，绕远路；偶次幂硬拆因子导致无法换元。

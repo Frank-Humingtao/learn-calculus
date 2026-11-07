@@ -19,6 +19,8 @@ prereqs: [01-05]
 - 📖 阅读：§1.5 p.61–64 `course/sources/stewart9/008 01 函数与模型 - 1.05 反函数与对数函数.pdf`（文字版 `course/extracted/008 01 函数与模型 - 1.05 反函数与对数函数.md`），重点 $\sin^{-1}$ 的定义 p.61–62、例13 p.62、例14 p.63（两种解法）、$\tan^{-1}$ 与公式 12 p.63–64（覆盖 1、2、3）
 - ✏️ 练习：§1.5 习题 p.66 第 70、72 题（求值）、74 题（$\arcsin(\sin\frac{5\pi}4)$、$\cos(2\sin^{-1}\frac5{13})$）、76 题（化简）、81 题（定义域与值域）（覆盖 1、2、3）
 - 💬 对话要点：接 01-05 的“$x^2$ 怎样限制才能倒回来”，让学习者自己挑 $\sin x$ 的一段：为什么选 $[-\frac\pi2,\frac\pi2]$ 而不是 $[0,\pi]$（要取遍 $[-1,1]$ 且单调）。用练习 74a 检验相消等式的范围条件；化简题让学习者先画三角形，再问“$x$ 为负时还对吗”（覆盖 1、2、3）
+- 🎬 MIT 18.01 第 5 讲：视频 [28:16–32:06](https://www.bilibili.com/video/BV1mNgm66EZu?p=5&t=1696)、[34:42–36:09](https://www.bilibili.com/video/BV1mNgm66EZu?p=5&t=2082)；讲义图 fig1（讲义 `course/extracted/mit1801/L05/OCW_18.01_L05_讲义_中文.md`，摘要 `course/prep/mit1801-L05.md`）——标准 1（$\tan^{-1}$ 的值域、渐近线）、3（用直角三角形化简 $\cos(\arctan x)$）
+- 🎬 MIT 18.01 第 25 讲：视频 [21:28–25:47](https://www.bilibili.com/video/BV1mNgm66EZu?p=25&t=1288)（讲义 `course/extracted/mit1801/L25/OCW_18.01_L25_讲义_中文.md`，摘要 `course/prep/mit1801-L25.md`）——标准 3：用直角三角形化简 $\tan(\operatorname{arccsc}x)$ 一类表达式
 
 ## 常见误区
 - 把 $\sin^{-1}x$ 当成 $\frac1{\sin x}$（教材页边明示）

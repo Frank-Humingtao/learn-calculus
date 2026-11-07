@@ -20,6 +20,12 @@ prereqs: [04-02, 03-07]
 - 📖 阅读：§4.4 p.309–313 `course/sources/stewart9/040 04 导数的应用 - 4.04 不定型与洛必达法则.pdf`（文字版 `course/extracted/040 04 导数的应用 - 4.04 不定型与洛必达法则.md`），重点 不定型引入 p.309–310、图 4-4-1 p.310、注 3 p.311、例 1–3 p.311–312、例 4 p.312、例 5 p.313（覆盖 1、2、3、4）
 - ✏️ 练习：§4.4 习题 p.316–319：1–4 中挑 1 题（判断是否不定型）（覆盖 1）；8–31 中挑 4 题（含一题需连用、一题不是不定型）（覆盖 1、3）；第 75、76 题（$e^x$ 与 $\ln x$ 的增长速度）（覆盖 4）；第 77 题（法则失效的循环情形，选做）（覆盖 1）
 - 💬 对话要点：用“分子分母赛跑”的比喻切入：都趋于 0（或 ∞）时，比的是谁跑得快，而速度就是导数。追问“为什么是分子、分母分别求导，而不是对整个商用商法则？”。用例 5 $\lim_{x\to\pi}\frac{\sin x}{1-\cos x}$ 做陷阱题，看学习者是否先核对类型（覆盖 1、2）。
+- 🎬 MIT 18.01 第 8 讲：讲义 Example 3（视频未讲）：$\lim_{x\to0}\frac{(1+2x)^{10}-1}{x}=20$ 用线性近似算（讲义 `course/extracted/mit1801/L08/OCW_18.01_L08_讲义_中文.md`，摘要 `course/prep/mit1801-L08.md`）——标准 2；“局部线性化后比值等于斜率比”的具体演示
+- 🎬 MIT 18.01 第 31 讲：视频 [02:23–07:35](https://www.bilibili.com/video/BV1mNgm66EZu?p=31&t=143)；讲义 Example 0（讲义 `course/extracted/mit1801/L31/OCW_18.01_L31_讲义_中文.md`，摘要 `course/prep/mit1801-L31.md`）——标准 2：用差商之比推出易版本，正好是斯图尔特“注 3”的特殊情形证明，配了板书推导
+- 🎬 MIT 18.01 第 31 讲：视频 [07:36–16:34](https://www.bilibili.com/video/BV1mNgm66EZu?p=31&t=456)；讲义 Example 1、2、5（讲义 `course/extracted/mit1801/L31/OCW_18.01_L31_讲义_中文.md`，摘要 `course/prep/mit1801-L31.md`）——标准 1、3：“不是商法则”、连用两次、右边存在的逻辑方向；三段真实 Q&A 讲清假设，正对“$\lim f'/g'$ 不存在”这条误区
+- 🎬 MIT 18.01 第 31 讲：视频 [16:35–18:18](https://www.bilibili.com/video/BV1mNgm66EZu?p=31&t=995)；讲义 Example 1、5 的近似对照（讲义 `course/extracted/mit1801/L31/OCW_18.01_L31_讲义_中文.md`，摘要 `course/prep/mit1801-L31.md`）——标准 2：用线性／二次近似复核答案，是“局部线性化”直观解释的现成演示（回扣 03-12）
+- 🎬 MIT 18.01 第 31 讲：视频 [21:06–29:35](https://www.bilibili.com/video/BV1mNgm66EZu?p=31&t=1266)；讲义 Example 7–9（讲义 `course/extracted/mit1801/L31/OCW_18.01_L31_讲义_中文.md`，摘要 `course/prep/mit1801-L31.md`）——标准 4：$e^x$ 快于任何幂、$\ln x$ 慢于任何幂；“开 100 次方”快法是增量
+- 🎬 MIT 18.01 第 31 讲：视频 [33:50–36:33](https://www.bilibili.com/video/BV1mNgm66EZu?p=31&t=2030)；讲义 Example 6（讲义 `course/extracted/mit1801/L31/OCW_18.01_L31_讲义_中文.md`，摘要 `course/prep/mit1801-L31.md`）——标准 1：$\sin x/x^2$ 反例，可替代或补充斯图尔特例 5 做陷阱题
 
 ## 常见误区
 - 不先验证是不定型就使用（例 5 盲目使用得 $-\infty$，实际是 0）。

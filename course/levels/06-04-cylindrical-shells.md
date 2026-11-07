@@ -19,6 +19,11 @@ prereqs: [06-03]
 - 📖 阅读：§6.3 p.460–464 `course/sources/stewart9/059 06 积分的应用 - 6.03 柱壳法求体积.pdf`（文字版 `course/extracted/059 06 积分的应用 - 6.03 柱壳法求体积.md`），重点 开篇与柱壳体积 p.460–461、图 6-3-5（覆盖 1）；例 1–4 p.462–463（覆盖 2）；p.463 选择方法的考虑与例 5 p.464 同题双解（覆盖 3）
 - ✏️ 练习：§6.3 习题 p.464–466：第 1 或 2 题（说明为何垫圈法难，覆盖 1）；第 9–14 题中选 1 题、第 15–20 题中选 1 题（覆盖 2）；第 21 或 22 题（两种积分变量各做一次，覆盖 3）；第 23–30 题中选 1 题（绕其他直线，覆盖 2）；第 47–59 题中选 1 题（任选方法，覆盖 3）
 - 💬 对话要点：先让学习者用垫圈法尝试开篇问题，卡在反解三次方程处，再引出“换一个方向切”。用“卷纸筒剪开摊平”帮他记住 $2\pi rh\Delta r$。关键追问：近似矩形与旋转轴是平行还是垂直？例 4 的半径为什么是 $2-x$？检验时给一道题，只让他判断两种方法各对哪个变量积分、哪种更省事。
+- 🎬 MIT 18.01 第 20 讲：视频 [16:05–25:28](https://www.bilibili.com/video/BV1mNgm66EZu?p=20&t=965)；讲义 Method 2、图 4（讲义 `course/extracted/mit1801/L20/OCW_18.01_L20_讲义_中文.md`，摘要 `course/prep/mit1801-L20.md`）——标准 1、2（周长 × 高 × 厚，展开成平板）
+- 🎬 MIT 18.01 第 20 讲：视频 [25:29–28:40](https://www.bilibili.com/video/BV1mNgm66EZu?p=20&t=1529)；讲义 Method 1、图 2（讲义 `course/extracted/mit1801/L20/OCW_18.01_L20_讲义_中文.md`，摘要 `course/prep/mit1801-L20.md`）——标准 3（同一立体圆盘法 vs 柱壳法；何时选哪种）；四则真实问答
+- 🎬 MIT 18.01 第 22 讲：视频 [04:38–07:06](https://www.bilibili.com/video/BV1mNgm66EZu?p=22&t=278)（讲义 `course/extracted/mit1801/L22/OCW_18.01_L22_讲义_中文.md`，摘要 `course/prep/mit1801-L22.md`）——标准 1、2：柱壳 $2\pi r\cdot h\cdot dr$ 的又一应用（这里的“高”是概率密度）
+- 🎬 MIT 18.01 第 23 讲：视频 [35:59–39:28](https://www.bilibili.com/video/BV1mNgm66EZu?p=23&t=2159)（讲义 `course/extracted/mit1801/L23/OCW_18.01_L23_讲义_中文.md`，摘要 `course/prep/mit1801-L23.md`）——标准 1、3：与斯图尔特开篇 $y=2x^2-x^3$ 是同一类“垫圈法要反解三次方程”的例子，可作为对照
+- 🎬 MIT 18.01 第 27 讲：视频 [33:01–40:50](https://www.bilibili.com/video/BV1mNgm66EZu?p=27&t=1981)（讲义 `course/extracted/mit1801/L27/OCW_18.01_L27_讲义_中文.md`，摘要 `course/prep/mit1801-L27.md`）——标准 3：同一旋转体圆盘 vs 柱壳双解；也可作 07-01 的应用题
 
 ## 常见误区
 - 漏掉因子 $2\pi$，或半径写成 $x$ 而不是到旋转轴的距离（例 4 应为 $2-x$）

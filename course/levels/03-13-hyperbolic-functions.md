@@ -23,6 +23,8 @@ prereqs: [03-07]
 - ✏️ 练习：同上 第 28 题（证明双曲函数导数公式）、第 35、37、41、47 题（求导）（覆盖 3、4）
 - ✏️ 练习：同上 第 29 题（$\sinh^{-1}$ 的另一种解法）（覆盖 4）
 - 💬 对话要点：先让学习者在 Desmos 上画 $\frac12e^x$ 和 $\frac12e^{-x}$，问“它们的和、差分别长什么样”，得到 $\cosh$、$\sinh$。然后让他验证 $\cosh^2t-\sinh^2t=1$，追问“这和 $\cos^2t+\sin^2t=1$ 有什么相似和不同”，引出名称由来。检验时让他写出 $(\cosh x)'$ 并与 $(\cos x)'$ 对比符号。（覆盖 1、2、3）
+- 🎬 MIT 18.01 第 7 讲：讲义 Hyperbolic Sine and Cosine（视频未讲）（讲义 `course/extracted/mit1801/L07/OCW_18.01_L07_讲义_中文.md`，摘要 `course/prep/mit1801-L07.md`）——标准 1、2、3；讲义版的定义、导数、$\cosh^2-\sinh^2=1$ 和“双曲”名称由来
+- 🎬 MIT 18.01 第 34 讲：视频 [35:32–38:25](https://www.bilibili.com/video/BV1mNgm66EZu?p=34&t=2132)（讲义 `course/extracted/mit1801/L34/OCW_18.01_L34_讲义_中文.md`，摘要 `course/prep/mit1801-L34.md`）——补充：$\cosh x=\sum\frac{x^{2n}}{(2n)!}$ 与 $\cos x$ 只差符号，可解释“为什么和三角函数如此相像”（导师自行推，素材未讲）
 
 ## 常见误区
 - 照搬三角函数的符号，把 $(\cosh x)'$ 写成 $-\sinh x$（教材明确提醒有些符号不同）。

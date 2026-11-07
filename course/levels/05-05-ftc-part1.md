@@ -19,6 +19,11 @@ prereqs: [05-04, 02-13]
 - 📖 阅读：可先做 §5.2 末探索专题“面积函数” p.398（由 $\int_1^x(2t+1)dt$ 等猜出 $g'=f$，作为引入）；再读 §5.3 p.399–402 `course/sources/stewart9/051 05 积分 - 5.03 微积分基本定理.pdf`（文字版 `course/extracted/051 05 积分 - 5.03 微积分基本定理.md`），重点 例 1 p.399–400、直观推导 p.400、证明 p.401、例 2–4 p.402（覆盖 1、2、3）
 - ✏️ 练习：§5.3 习题 p.406–409 第 2–4 题（由 $f$ 的图像研究 $g$）、第 7 题（两种方法求 $g'$）、第 9–20 题中选 4 题（含下限是变量、上限是复合函数）、第 72 题（用 FTC1 判断单调性/凹凸）（覆盖 1、3）
 - 💬 对话要点：用“油漆刷子往右推，已刷面积随 $x$ 增长”的画面切入：刷子再往右推一点点 $h$，新增面积约是 $f(x)\cdot h$。让学习者先做探索专题，自己猜出结论再讲定理。检验时问：“$g'(x)=f(t)$ 对吗？”以及“上限换成 $x^2$ 时为什么多出 $2x$？”（覆盖 1、2、3）
+- 🎬 MIT 18.01 第 16 讲：视频 [31:04–35:15](https://www.bilibili.com/video/BV1mNgm66EZu?p=16&t=1864)；讲义 Pattern $A'(b)=f(b)$（讲义 `course/extracted/mit1801/L16/OCW_18.01_L16_讲义_中文.md`，摘要 `course/prep/mit1801-L16.md`）——作为 FTC 的引子：先猜规律，再引出"面积函数的导数 = $f$"
+- 🎬 MIT 18.01 第 18 讲：视频 [14:40–25:09](https://www.bilibili.com/video/BV1mNgm66EZu?p=18&t=880)；讲义 FTC 2、Geometric Proof、图 1（讲义 `course/extracted/mit1801/L18/OCW_18.01_L18_讲义_中文.md`，摘要 `course/prep/mit1801-L18.md`）——标准 2（细长矩形解释 $g'=f$）、标准 3（求导，"抄写练习"）；哑变量警告直接对应卡片范围
+- 🎬 MIT 18.01 第 18 讲：视频 [31:49–38:10](https://www.bilibili.com/video/BV1mNgm66EZu?p=18&t=1909)；讲义 new functions、图 2（讲义 `course/extracted/mit1801/L18/OCW_18.01_L18_讲义_中文.md`，摘要 `course/prep/mit1801-L18.md`）——卡片"用积分定义的新函数（菲涅耳函数）"；$e^{-t^2}$、$\mathrm{Li}$ 是更多例子
+- 🎬 MIT 18.01 第 19 讲：视频 [01:04–08:01](https://www.bilibili.com/video/BV1mNgm66EZu?p=19&t=64)、[11:42–18:50](https://www.bilibili.com/video/BV1mNgm66EZu?p=19&t=702)（t=64–481、702–1130）（讲义 `course/extracted/mit1801/L19/OCW_18.01_L19_讲义_中文.md`，摘要 `course/prep/mit1801-L19.md`）——标准 1、3：由 $g'=f$ 读出积分定义函数的增减、凹凸（$L$ 与 $\int_0^xe^{-t^2}dt$ 两例）
+- 🎬 MIT 18.01 第 23 讲：视频 [15:09–16:20](https://www.bilibili.com/video/BV1mNgm66EZu?p=23&t=909)（讲义 `course/extracted/mit1801/L23/OCW_18.01_L23_讲义_中文.md`，摘要 `course/prep/mit1801-L23.md`）——积分定义的函数 $F(x)=\int_0^xe^{-t^2}dt$ 有水平渐近线 $\sqrt\pi/2$，可补充标准 1
 
 ## 常见误区
 - 写成 $g'(x)=f(t)$，没意识到 $t$ 是哑变量、$g$ 是 $x$ 的函数。
@@ -30,6 +35,7 @@ prereqs: [05-04, 02-13]
 - 练习 9–20 题干 OCR 为“求原函数”，应为“求导数”。
 - 探索专题标题 OCR 缺失，在 `course/extracted/050 05 积分 - 5.02 定积分.md` 的 p.398 处；例 1、例 3 的图（图 5-3-2、5-3-7、5-3-8）需看原 PDF。
 - 证明中 $h<0$ 的情形留作练习 87。
+- （18.01）18.01 的编号与斯图尔特相反：Jerison 叫 **FTC 2** 的（$\frac{d}{dx}\int_a^xf=f$）就是本关的第一部分。看 L18 视频前先说明。
 
 ## 后续
 05-06

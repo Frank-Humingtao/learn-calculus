@@ -23,6 +23,10 @@ prereqs: [03-02, 03-07]
 - ✏️ 练习：同上 第 9、11 题（铯-137 半衰期、放射性碳定年）（覆盖 2）
 - ✏️ 练习：同上 第 15 或 16 题（火鸡冷却、推断死亡时间）、第 20 题（复利比较）（覆盖 3、4）
 - 💬 对话要点：从“利滚利”或“细菌越多繁殖越快”切入，让学习者用文字描述“变化率与自身成正比”，再翻译成 $dy/dt=ky$。追问“你能猜一个满足它的函数吗”，把 03-02 的 $(e^x)'=e^x$ 联系起来。牛顿冷却部分重点问“茶的温度会无限下降吗”，检验他是否理解要先减去环境温度。（覆盖 1、3）
+- 🎬 MIT 18.01 第 6 讲：讲义 Remark 2（股市“跌 50 点”，视频未讲，见 L07）（讲义 `course/extracted/mit1801/L06/OCW_18.01_L06_讲义_中文.md`，摘要 `course/prep/mit1801-L06.md`）——标准 1 的动机：相对变化率 $f'/f=(\ln f)'$
+- 🎬 MIT 18.01 第 7 讲：视频 [08:30–11:09](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=510)（讲义 `course/extracted/mit1801/L07/OCW_18.01_L07_讲义_中文.md`，摘要 `course/prep/mit1801-L07.md`）——标准 1；相对变化率 $p'/p=(\ln p)'$ 的金融动机
+- 🎬 MIT 18.01 第 16 讲：视频 [44:48–46:57](https://www.bilibili.com/video/BV1mNgm66EZu?p=16&t=2688)（讲义 `course/extracted/mit1801/L16/OCW_18.01_L16_讲义_中文.md`，摘要 `course/prep/mit1801-L16.md`）——补充：连续复利 $Pe^{rt}$ 与积分结合的应用（卡片标准 4 的延伸）
+- 🎬 MIT 18.01 第 32 讲：视频 [14:04–17:08](https://www.bilibili.com/video/BV1mNgm66EZu?p=32&t=844)；讲义 Application（钋-210）（讲义 `course/extracted/mit1801/L32/OCW_18.01_L32_讲义_中文.md`，摘要 `course/prep/mit1801-L32.md`）——补充：衰变率积分到无穷求总量、半衰期 $k=\ln2/H$
 
 ## 常见误区
 - 把“增长率与人口成正比”和“增长率是常数”混为一谈。

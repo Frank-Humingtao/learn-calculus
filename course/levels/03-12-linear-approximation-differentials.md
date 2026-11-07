@@ -23,6 +23,15 @@ prereqs: [02-12, 03-05]
 - ✏️ 练习：同上 第 13、19 题（求微分并代值）、第 23、27 题（比较 $\Delta y$ 与 $dy$）（覆盖 3）
 - ✏️ 练习：同上 第 31、33、36 题（线性近似估值，注意 $\cos29^\circ$ 要换成弧度）、第 41、43 题（测量误差与相对误差）（覆盖 1、4）
 - 💬 对话要点：先让学习者在 Desmos 里把 $\sqrt{x+3}$ 在 $(1,2)$ 附近不断放大，看曲线“变直”，引出“局部线性”。追问：“$\sqrt{3.98}$ 的近似值偏大还是偏小？为什么？”检验他是否会看切线位置。最后让他口述 $dx$、$dy$、$\Delta y$ 三者在图上各是哪条线段。（覆盖 1、2、3）
+- 🎬 MIT 18.01 第 2 讲：视频 [09:13–13:28](https://www.bilibili.com/video/BV1mNgm66EZu?p=2&t=553)；讲义图 fig2/fig3（讲义 `course/extracted/mit1801/L02/OCW_18.01_L02_讲义_中文.md`，摘要 `course/prep/mit1801-L02.md`）——作为动机补充：$\Delta L\approx\frac{dL}{dh}\Delta h$ 就是微分/误差传播的雏形
+- 🎬 MIT 18.01 第 8 讲：视频 [00:30–16:07](https://www.bilibili.com/video/BV1mNgm66EZu?p=8&t=30)；讲义 Linear Approximation、Example 1、Basic list、Fig 1–2（讲义 `course/extracted/mit1801/L08/OCW_18.01_L08_讲义_中文.md`，摘要 `course/prep/mit1801-L08.md`）——标准 1；三种解读讲透同一公式；$x_0=0$ 五条目录比斯图尔特零散的 $\sin x\approx x$ 更系统
+- 🎬 MIT 18.01 第 8 讲：视频 [16:07–30:18](https://www.bilibili.com/video/BV1mNgm66EZu?p=8&t=967)；讲义 Example 2、4（讲义 `course/extracted/mit1801/L08/OCW_18.01_L08_讲义_中文.md`，摘要 `course/prep/mit1801-L08.md`）——标准 1、4；组合近似“拼目录 + 扔高阶”是斯图尔特没有的技巧；GPS 例的 $\Delta T/T\approx\frac12v^2/c^2$ 是相对误差的真实场景
+- 🎬 MIT 18.01 第 8 讲：视频 [30:18–36:34](https://www.bilibili.com/video/BV1mNgm66EZu?p=8&t=1818)；讲义 Quadratic Approximations、Fig 4（讲义 `course/extracted/mit1801/L08/OCW_18.01_L08_讲义_中文.md`，摘要 `course/prep/mit1801-L08.md`）——超出 03-12 范围（卡片“不讲”二次近似），见下
+- 🎬 MIT 18.01 第 9 讲：视频 [00:15–06:34](https://www.bilibili.com/video/BV1mNgm66EZu?p=9&t=15)（讲义 `course/extracted/mit1801/L09/OCW_18.01_L09_讲义_中文.md`，摘要 `course/prep/mit1801-L09.md`）——标准 4；相对误差的无量纲比例读法、“压成拇指法则”的工程观
+- 🎬 MIT 18.01 第 13 讲：视频 [27:24–29:41](https://www.bilibili.com/video/BV1mNgm66EZu?p=13&t=1644)；讲义图 3（讲义 `course/extracted/mit1801/L13/OCW_18.01_L13_讲义_中文.md`，摘要 `course/prep/mit1801-L13.md`）——线性近似与 MVT 的对照，回扣 03-12 的线性化（复习用）
+- 🎬 MIT 18.01 第 14 讲：视频 [00:16–10:34](https://www.bilibili.com/video/BV1mNgm66EZu?p=14&t=16)；讲义 Example 1 Method 1–3（讲义 `course/extracted/mit1801/L14/OCW_18.01_L14_讲义_中文.md`，摘要 `course/prep/mit1801-L14.md`）——标准 1（$\sqrt[3]{\ }$ 型估算）、标准 3（$dy$ 沿切线 vs $\Delta y$ 沿曲线）；增量：莱布尼茨记号史，三种方法对照
+- 🎬 MIT 18.01 第 31 讲：视频 [16:35–18:18](https://www.bilibili.com/video/BV1mNgm66EZu?p=31&t=995)（讲义 `course/extracted/mit1801/L31/OCW_18.01_L31_讲义_中文.md`，摘要 `course/prep/mit1801-L31.md`）——补充：线性／二次近似的一个应用场景（二次近似属斯图尔特 11 章，此处只作展示）
+- 🎬 MIT 18.01 第 34 讲：视频 [37:01–38:25](https://www.bilibili.com/video/BV1mNgm66EZu?p=34&t=2221)（讲义 `course/extracted/mit1801/L34/OCW_18.01_L34_讲义_中文.md`，摘要 `course/prep/mit1801-L34.md`）——补充：线性近似 $\sin x\approx x$ 是泰勒级数的第一项；03-12 范围“不讲”高阶，只作展望
 
 ## 常见误区
 - 在远离 $a$ 的点使用线性近似，仍以为很准。
@@ -34,6 +43,7 @@ prereqs: [02-12, 03-05]
 ## 导师注意
 - 例 2 与练习 1–10 需要画图确定精度区间，教材原用绘图软件，可用 Desmos 或 Python 代替（这是补充）。
 - 前置 02-12 用于回顾切线方程；如果学习者对切线方程很熟，可以直接开始。
+- （18.01）18.01 L08 视频用 $e^{-3x}$，讲义用 $e^{-2x}$，系数不同，引用时说清以哪个为准。二次近似留给 03-14（选学）。
 
 ## 后续
 03-13

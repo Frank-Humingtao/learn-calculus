@@ -21,6 +21,9 @@ prereqs: [04-04, 02-10]
 - 📖 阅读：§4.6 p.329–336 `course/sources/stewart9/042 04 导数的应用 - 4.06 利用微积分和技术工具绘图.pdf`（文字版 `course/extracted/042 04 导数的应用 - 4.06 利用微积分和技术工具绘图.md`），重点 例 1 p.329–330、例 2 p.330–331、例 5 函数族 p.333–334（覆盖 3、4）
 - ✏️ 练习：§4.5 习题 p.327–329：1–54 中挑 3 题（一题有理函数、一题根式或对数、一题三角或指数）（覆盖 1、2）；65–68 中挑 1 题（求斜渐近线）（覆盖 2）；§4.6 习题 p.334–336：1–12 中挑 1 题（用 Desmos 画 $f$、$f'$、$f''$）（覆盖 3）；28–40 中挑 1 题（函数族）（覆盖 4）
 - 💬 对话要点：先展示 p.320 的 $8x^3-21x^2+18x+2$ 在默认窗口下“看不出”极值的例子，问学习者“图像是不是就这样？”。绘图时让他边做边说当前在 A–H 的哪一步、这一步得到的信息画在哪；完成后用 Desmos 对照。关键追问：$\ln(4-x^2)$ 的垂直渐近线怎么找（不是令分母为 0）？（覆盖 1、2、3）
+- 🎬 MIT 18.01 第 9 讲：视频 [24:02–26:46](https://www.bilibili.com/video/BV1mNgm66EZu?p=9&t=1442)；[29:07–41:15](https://www.bilibili.com/video/BV1mNgm66EZu?p=9&t=1747)；讲义 Rubric、Example 2（$1/x$）、Example 4（$\ln x/x$）（讲义 `course/extracted/mit1801/L09/OCW_18.01_L09_讲义_中文.md`，摘要 `course/prep/mit1801-L09.md`）——标准 1；讲义 $1/x$ 例警告“先找间断点”；$\ln x/x$ 用 $x=2^{\pm n}$ 代入求两端，不用洛必达
+- 🎬 MIT 18.01 第 10 讲：视频 [00:15–34:42](https://www.bilibili.com/video/BV1mNgm66EZu?p=10&t=15)（讲义 `course/extracted/mit1801/L10/OCW_18.01_L10_讲义_中文.md`，摘要 `course/prep/mit1801-L10.md`）——标准 1、2；$(x+1)/(x+2)$ 无临界点也能画、$x/\ln x$ 完整分析；五步策略是 A–H 清单的精简版
+- 🎬 MIT 18.01 第 19 讲：视频 [03:44–08:01](https://www.bilibili.com/video/BV1mNgm66EZu?p=19&t=224)、[11:42–16:45](https://www.bilibili.com/video/BV1mNgm66EZu?p=19&t=702)（讲义 `course/extracted/mit1801/L19/OCW_18.01_L19_讲义_中文.md`，摘要 `course/prep/mit1801-L19.md`）——用一阶、二阶导和端点行为画图的完整示范
 
 ## 常见误区
 - 忽略定义域，把定义域外的临界值或拐点算进去（例 1 的 $\pm1$、例 2 的 $-\frac43$）。

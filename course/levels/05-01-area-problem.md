@@ -19,6 +19,10 @@ prereqs: [02-10]
 - 📖 阅读：§5.1 p.372–379 `course/sources/stewart9/049 05 积分 - 5.01 面积与距离.pdf`（文字版 `course/extracted/049 05 积分 - 5.01 面积与距离.md`），重点 例 1 p.372–373（4 个、8 个矩形与表 5-1-1）、例 2 p.374–375（平方和公式求 $R_n\to\frac13$）、定义 2 与上和/下和的注 p.377、例 3 p.378–379（$e^{-x}$ 的极限表达式与中点和）（覆盖 1、2、3）
 - ✏️ 练习：§5.1 习题 p.381–384 第 1–4 题（读图/按公式求 $L_n,R_n,M_n$ 并判断高估低估）、第 16–17 题（写出面积的极限表达式）、第 20 题（由极限反认区域）、第 24 题（用立方和公式求 $y=x^3$ 下的面积）（覆盖 2、3）
 - 💬 对话要点：先问“三角形、矩形的面积我们会算，曲边的区域面积到底指什么？”，引出“用会算的去逼近不会算的”。让学习者亲手算 $y=x^2$ 的 $L_4$、$R_4$，看出真值被夹在中间、$n$ 越大夹得越紧。追问：对递减函数，右端点和还是高估吗？最后让他自己写出 $x_i$ 并检查有没有漏掉 $a$。（覆盖 1、2、3）
+- 🎬 MIT 18.01 第 16 讲：视频 [04:05–24:20](https://www.bilibili.com/video/BV1mNgm66EZu?p=16&t=245)（t=245–1460，重点 t=446–1460）；讲义 Example 1、图 1–3（讲义 `course/extracted/mit1801/L16/OCW_18.01_L16_讲义_中文.md`，摘要 `course/prep/mit1801-L16.md`）——标准 1、3；用阶梯金字塔夹逼代替斯图尔特直接套平方和公式，能看出 $\frac13$ 从哪来；两则真实问答正好对应卡片误区"不会把含 $n$ 的因子提到 $\sum$ 外"
+- 🎬 MIT 18.01 第 16 讲：视频 [35:16–40:04](https://www.bilibili.com/video/BV1mNgm66EZu?p=16&t=2116)；讲义 General Picture、图 5（讲义 `course/extracted/mit1801/L16/OCW_18.01_L16_讲义_中文.md`，摘要 `course/prep/mit1801-L16.md`）——标准 2（左/右/中点样本点的高低估）
+- 🎬 MIT 18.01 第 23 讲：视频 [30:25–32:23](https://www.bilibili.com/video/BV1mNgm66EZu?p=23&t=1825)（讲义 `course/extracted/mit1801/L23/OCW_18.01_L23_讲义_中文.md`，摘要 `course/prep/mit1801-L23.md`）——标准 2：上和/下和与左和/右和随单调性对应，可直接作为追问
+- 🎬 MIT 18.01 第 33 讲：视频 [27:55–34:29](https://www.bilibili.com/video/BV1mNgm66EZu?p=33&t=1675)；讲义图 fig1_upper_riemann.png、fig2_lower_riemann.png（讲义 `course/extracted/mit1801/L33/OCW_18.01_L33_讲义_中文.md`，摘要 `course/prep/mit1801-L33.md`）——补充应用：上和／下和夹逼的一个漂亮用法（$\Delta x=1$），可作为 05-01 标准 2“高估还是低估”的延伸
 
 ## 常见误区
 - 把 $x_i=a+i\Delta x$ 写成 $i\Delta x$，忘了加起点 $a$。
