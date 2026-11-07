@@ -19,7 +19,7 @@
 | 学习者 | 只有一人 |
 | 课程 | 一个仓库一门课；通用部分（`.agents/` `scripts/` `AGENTS.md`）与课程部分（`course/`）严格分目录 |
 | 素材处理 | 全部本地、不花 token：视频优先用字幕，否则 mlx-whisper 转写；ffmpeg 场景检测截板书关键帧；PDF 用文字层，扫描版用 MinerU。不用 NotebookLM，不用 Gemini API |
-| git | 原始视频/PDF 不提交；提取文字、关键帧、备课产物提交 |
+| git | 原始视频/PDF 不提交，打包放 GitHub Release `sources-vN`（[ADR 0001](docs/adr/0001-sources-via-github-release.md)）；提取文字、关键帧、备课产物提交 |
 | 备课 | 分层：每份素材（每节课/每章）先摘要 → 合并对齐多份素材 → 生成 `course/SYLLABUS.md` **交学习者审核** → 确认后生成关卡卡片和 issue |
 | 关卡卡片 | `course/levels/<id>.md`：核心问题、范围（讲什么/不讲什么）、通关标准 2–4 条、多条学习路径（视频时间段+关键帧 / 教材页码 / 对话要点，注明覆盖哪些标准）、常见误区、前置/后续 |
 | 进度 | GitHub Issues：一关一 issue（正文=核心问题+通关标准+卡片链接），单元=milestone，每单元一个 `boss` 阶段测试 issue |
@@ -28,6 +28,7 @@
 | 摸底 | 全课摸底（框架建好后一次）+ 单元摸底（每单元开学前，概念题为主、至多一道动手题）。判断先当面说，学习者决定跳过哪些（→ 已掌握）、从哪开始（→ label `摸底:从这开始`），再记录 |
 | 教学 | 一次一题；先问已知 → 选路径学 → 学习者复述、AI 只补缺口 → 出题（计算 / 概念判断（干扰项来自误区）/ 解释为什么 / 迁移）→ 答错先讲解再换形式重问。默认讲解式，学习者说“引导我”切苏格拉底式 |
 | 复习 | 不做定时复习（理解型理工科内容） |
+| 多设备 | 2026-11-07 定：Mac（Claude Code）、Windows（Codex，PowerShell）、Linux 云电脑（Grok bot）、Cursor 云 Agent 都能接着学。依赖分两档：学习档 = python3 标准库 + git + gh，三平台通用；备课档只在 Mac。`scripts/doctor.py` 自检，`learn-setup`（配环境）补齐、`learn-update`（检查更新）拉新。学习设备不改仓库文件，卡片有错打 label `卡片勘误`；`set start` 评论带设备名（`.learn-device`），不加锁 |
 
 ## 参考
 
@@ -38,5 +39,7 @@
 ## 暂不做
 
 - 多学习者、多课程同仓库
+- 给纯聊天、跑不了命令的 bot 做接口
+- 多设备之间的关卡锁
 - 间隔复习算法（FSRS 等）
 - 进度可视化页面（GitHub Projects 看板可直接用）

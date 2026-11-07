@@ -35,3 +35,52 @@ def ffmpeg_exe():
         return imageio_ffmpeg.get_ffmpeg_exe()
     except ImportError:
         raise SystemExit("找不到 ffmpeg：先运行 bash scripts/setup.sh 并 source .venv/bin/activate")
+
+
+# ---------- 跨平台：UTF-8 输出、gh、设备名 ----------
+
+def utf8_stdio():
+    """Windows PowerShell 默认非 UTF-8，中文会乱码或报错"""
+    import sys
+    for s in (sys.stdout, sys.stderr):
+        try:
+            s.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass
+
+
+def find_gh():
+    """gh 可执行文件路径；没有返回 None"""
+    import shutil
+    exe = shutil.which("gh")
+    if exe:
+        return exe
+    local = os.path.expanduser("~/.local/bin/gh")
+    return local if os.path.exists(local) else None
+
+
+def run(cmd, input=None):
+    """跑命令，返回 (退出码, stdout, stderr)；命令不存在时退出码 127"""
+    import subprocess
+    try:
+        p = subprocess.run(cmd, cwd=ROOT, input=input, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                           encoding="utf-8", errors="replace")
+    except OSError as e:
+        return 127, "", str(e)
+    return p.returncode, p.stdout, p.stderr
+
+
+DEVICE_FILE = os.path.join(ROOT, ".learn-device")
+
+
+def device_name():
+    """本设备的名字：.learn-device 第一行，缺省 hostname"""
+    import socket
+    try:
+        with open(DEVICE_FILE, encoding="utf-8") as f:
+            name = f.readline().strip()
+        if name:
+            return name
+    except OSError:
+        pass
+    return socket.gethostname()
