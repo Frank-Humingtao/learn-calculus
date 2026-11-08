@@ -88,10 +88,10 @@ def check_repo(gh):
 
 def check_labels(gh):
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from tracker import LABELS, L_ERRATUM
+    from tracker import LABELS, L_ERRATUM, L_NOTE
     code, out, _ = run([gh, "label", "list", "--limit", "200", "--json", "name", "--jq", ".[].name"])
     have = set(out.splitlines()) if code == 0 else set()
-    missing = [n for n in LABELS if n not in have and n != L_ERRATUM]
+    missing = [n for n in LABELS if n not in have and n not in (L_ERRATUM, L_NOTE)]
     if missing:
         report("fail", "label", "缺 %s" % "、".join(missing), "%s scripts/tracker.py setup" % PY)
     else:

@@ -27,7 +27,8 @@
 
 学习者会在多台设备上学（Mac 上的 Claude Code、Windows 上的 Codex、Linux 云电脑上的 bot 等），进度只在 GitHub Issues，仓库文件靠 git。
 
-- **学习设备不改仓库文件、不提交**。卡片有错就记卡片勘误：`tracker.py erratum <id>`，下次备课统一改。备课只在 Mac 上做。
+- **学习设备不改仓库文件、不提交**。卡片有错就记卡片勘误：`tracker.py erratum <id>`，下次备课统一改。备课只在 Mac 上做。（例外：`tracker.py note` 经 API 把笔记图片写进孤立分支 `note-images`，不碰本地文件和 main。）
+- **笔记只在 Claude 上写**（要截可视化），其他工具闯关时跳过写笔记这一步。
 - **Windows（PowerShell）**：`python3` 换成 `py`；bash 的 `<<'EOF'` 不能用，要传的记录先写进临时文件（UTF-8），再 `py scripts/tracker.py comment <id> --file 文件`（`erratum` 同理）。
 - `course/sources/` 原件不在 git 里，没下载也能学（用 `course/extracted/` 的文字和卡片里的视频链接）；要看原图才 `python3 scripts/sources.py pull`。
 
@@ -56,7 +57,7 @@ course/
 
 ## 脚本
 
-学习只用 `tracker.py` `doctor.py` `sources.py`：标准库 + `gh`，任何系统都能直接跑。提取类脚本属于备课档，只在 Mac 上：先 `source .venv/bin/activate`（没有就 `bash scripts/setup.sh`）。
+学习只用 `tracker.py` `doctor.py` `sources.py`（Claude 上写笔记再加 `snap.py`）：标准库 + `gh`，任何系统都能直接跑。提取类脚本属于备课档，只在 Mac 上：先 `source .venv/bin/activate`（没有就 `bash scripts/setup.sh`）。
 
 ```bash
 python3 scripts/extract_pdf.py course/sources/<书>.pdf
@@ -74,6 +75,8 @@ python3 scripts/tracker.py label <id> startpoint|clear        # 摸底标注（s
 python3 scripts/tracker.py clear-labels <单元号>               # 清掉某单元全部摸底标注
 python3 scripts/tracker.py comment <id> < record.md     # 或 --file record.md
 python3 scripts/tracker.py erratum <id> < note.md      # 卡片勘误；改好后 erratum <id> --fixed
+python3 scripts/tracker.py note <id> --file n.md [--image a.png ...] [--intro 导读]  # 给学习者的笔记
+python3 scripts/snap.py viz.html viz.png        # 可视化截图（要本机 Chrome）
 
 python3 scripts/doctor.py [--prep]              # 环境自检（只用标准库，不需要 .venv）
 python3 scripts/sources.py status|pull|publish  # 原始素材 ↔ GitHub Release sources-vN

@@ -11,9 +11,13 @@
   comment <id> < record.md    在 issue 下追加一条学习/测试记录（或 --file record.md）
   erratum <id> < note.md      记一条卡片勘误：打「卡片勘误」label 并评论（或 --file note.md）
   erratum <id> --fixed        勘误已在卡片里改好：去掉 label
+  note <id> [--file n.md] [--image a.png ...] [--intro 一句导读]
+                              给学习者看的笔记：找到或创建该关的笔记 issue，上传图片，追加一条评论
 
 状态：未开始=open 无状态 label；进行中=label「进行中」；待复习=label「待复习」；已掌握=closed
 关卡 id 与 issue 编号的对应保存在 course/issues.json。
+笔记 issue 带 label「笔记」、与关卡同 milestone、一直 open，按标题前缀 [<id>] 查找（不进 issues.json）。
+笔记里的图片经 gh api 存到 note-images 分支的 <id>/ 下；正文里写 {{img1}} {{img2}} … 指定位置，没写的追加在末尾。
 set start 会在 issue 下留一条带设备名的评论（设备名见 .learn-device，缺省 hostname），status 据此显示谁在学。
 """
 import argparse
@@ -31,6 +35,8 @@ L_DOING, L_REVIEW = "进行中", "待复习"
 L_SKIP, L_START = "摸底:可跳过", "摸底:从这开始"
 L_LEVEL, L_BOSS = "关卡", "boss"
 L_ERRATUM = "卡片勘误"
+L_NOTE = "笔记"
+NOTE_BRANCH = "note-images"
 START_MARK = "🟡 开始闯关 · 设备："
 LABELS = {
     L_LEVEL: ("ededed", "一个关卡"),
@@ -40,6 +46,7 @@ LABELS = {
     L_SKIP: ("0e8a16", "摸底显示可能已掌握"),
     L_START: ("1d76db", "摸底显示从这里开始"),
     L_ERRATUM: ("5319e7", "卡片有错，等下次备课修正"),
+    L_NOTE: ("0075ca", "给学习者回看的笔记"),
 }
 ICON = {"done": "✅", "doing": "🟡", "review": "🔁", "todo": "⬜"}
 
@@ -347,6 +354,98 @@ def cmd_erratum(a):
     print(gh("issue", "comment", n, "--body-file", "-", input=body).strip())
 
 
+# ---------- 笔记 ----------
+
+def ensure_label(name):
+    gh("label", "create", name, "--color", LABELS[name][0], "--description", LABELS[name][1], check=False)
+
+
+def repo_name():
+    return gh_json("repo", "view", "--json", "nameWithOwner")["nameWithOwner"]
+
+
+def ensure_note_branch():
+    """note-images 是孤立分支（不含代码），第一次用时经 API 创建"""
+    code, _, _ = run([find_gh(), "api", "repos/{owner}/{repo}/git/ref/heads/" + NOTE_BRANCH])
+    if code == 0:
+        return
+    readme = "笔记图片，由 scripts/tracker.py note 上传；按关卡 id 分目录。不要合并进 main。\n"
+    blob = gh_json("api", "repos/{owner}/{repo}/git/blobs", "-f", "content=" + readme, "-f", "encoding=utf-8")["sha"]
+    tree = gh_json("api", "repos/{owner}/{repo}/git/trees", "-f", "tree[][path]=README.md",
+                   "-f", "tree[][mode]=100644", "-f", "tree[][type]=blob", "-f", "tree[][sha]=" + blob)["sha"]
+    commit = gh_json("api", "repos/{owner}/{repo}/git/commits", "-f", "message=笔记图片分支", "-f", "tree=" + tree)["sha"]
+    gh("api", "repos/{owner}/{repo}/git/refs", "-f", "ref=refs/heads/" + NOTE_BRANCH, "-f", "sha=" + commit)
+
+
+def shrink(path):
+    """Mac 上用 sips 把长边压到 1600px，省空间；别处原样上传"""
+    import shutil
+    import tempfile
+    if not shutil.which("sips") or not path.lower().endswith((".png", ".jpg", ".jpeg")):
+        return path
+    out = os.path.join(tempfile.mkdtemp(), os.path.basename(path))
+    code, _, _ = run(["sips", "-Z", "1600", path, "--out", out])
+    return out if code == 0 and os.path.getsize(out) < os.path.getsize(path) else path
+
+
+def upload_image(repo, tid, path, stamp, i):
+    import base64
+    ext = os.path.splitext(path)[1].lower() or ".png"
+    dest = "%s/%s-%d%s" % (tid, stamp, i, ext)
+    with open(shrink(path), "rb") as f:
+        payload = json.dumps({"message": "笔记图片 " + dest, "branch": NOTE_BRANCH,
+                              "content": base64.b64encode(f.read()).decode()})
+    gh("api", "-X", "PUT", "repos/{owner}/{repo}/contents/" + dest, "--input", "-", input=payload)
+    return "https://github.com/%s/blob/%s/%s?raw=true" % (repo, NOTE_BRANCH, dest)
+
+
+def note_issue(tid, intro):
+    """找到或创建该关的笔记 issue，返回编号"""
+    data = gh_json("issue", "list", "--label", L_NOTE, "--state", "all", "--limit", "500", "--json", "number,title")
+    for d in data or []:
+        if d["title"].startswith("[%s]" % tid):
+            return str(d["number"])
+    n = issue_no(tid)
+    cards = load_cards()
+    if tid.endswith("-boss"):
+        key = tid.split("-")[0]
+        unit = next((c["unit"] for c in cards if c["id"].split("-")[0] == key), None)
+        title, head = "BOSS · %s" % (unit or key), "单元阶段测试的错题与收获。"
+    else:
+        c = next((c for c in cards if c["id"] == tid), None)
+        if not c:
+            sys.exit("找不到关卡 %s 的卡片" % tid)
+        unit, title, head = c["unit"], c["title"], "**核心问题**：%s" % c["question"]
+    body = "%s\n\n%s📌 关卡与学习进度：#%s\n" % (head, (intro.strip() + "\n\n") if intro else "", n)
+    ensure_label(L_NOTE)
+    args = ["issue", "create", "--title", "[%s] %s · 笔记" % (tid, title), "--body", body, "--label", L_NOTE]
+    if unit:
+        args += ["--milestone", unit]
+    url = gh(*args).strip()
+    print("+ 新建笔记 issue %s" % url)
+    return url.rsplit("/", 1)[1]
+
+
+def cmd_note(a):
+    import datetime
+    body = read_body(a) if (a.file or not sys.stdin.isatty()) else ""
+    if not body and not a.image:
+        sys.exit("笔记为空：没有正文也没有图片就不写")
+    for p in a.image:
+        if not os.path.isfile(p):
+            sys.exit("图片不存在：%s" % p)
+    n = note_issue(a.id, a.intro)
+    if a.image:
+        ensure_note_branch()
+        repo = repo_name()
+        stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        for i, p in enumerate(a.image, 1):
+            md = "![](%s)" % upload_image(repo, a.id, p, stamp, i)
+            ph = "{{img%d}}" % i
+            body = body.replace(ph, md) if ph in body else (body + "\n\n" + md).strip()
+    print(gh("issue", "comment", n, "--body-file", "-", input=body).strip())
+
+
 def main():
     utf8_stdio()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -363,6 +462,9 @@ def main():
     p = sub.add_parser("comment"); p.add_argument("id"); p.add_argument("--file"); p.set_defaults(f=cmd_comment)
     p = sub.add_parser("erratum"); p.add_argument("id"); p.add_argument("--fixed", action="store_true"); p.add_argument("--file")
     p.set_defaults(f=cmd_erratum)
+    p = sub.add_parser("note"); p.add_argument("id"); p.add_argument("--file")
+    p.add_argument("--image", action="append", default=[]); p.add_argument("--intro", default="")
+    p.set_defaults(f=cmd_note)
     a = ap.parse_args()
     a.f(a)
 
