@@ -18,7 +18,6 @@
 关卡 id 与 issue 编号的对应保存在 course/issues.json。
 笔记 issue 带 label「笔记」、与关卡同 milestone、一直 open，按标题前缀 [<id>] 查找（不进 issues.json）。
 笔记里的图片经 gh api 存到 note-images 分支的 <id>/ 下；正文里写 {{img1}} {{img2}} … 指定位置，没写的追加在末尾。
-set start 会在 issue 下留一条带设备名的评论（设备名见 .learn-device，缺省 hostname），status 据此显示谁在学。
 """
 import argparse
 import glob
@@ -27,7 +26,7 @@ import os
 import re
 import sys
 
-from common import COURSE, LEVELS, ROOT, device_name, find_gh, run, utf8_stdio
+from common import COURSE, LEVELS, ROOT, find_gh, run, utf8_stdio
 
 ISSUES_JSON = os.path.join(COURSE, "issues.json")
 
@@ -37,7 +36,6 @@ L_LEVEL, L_BOSS = "关卡", "boss"
 L_ERRATUM = "卡片勘误"
 L_NOTE = "笔记"
 NOTE_BRANCH = "note-images"
-START_MARK = "🟡 开始闯关 · 设备："
 LABELS = {
     L_LEVEL: ("ededed", "一个关卡"),
     L_BOSS: ("b60205", "单元阶段测试"),
@@ -56,7 +54,7 @@ ICON = {"done": "✅", "doing": "🟡", "review": "🔁", "todo": "⬜"}
 def gh(*args, input=None, check=True):
     exe = find_gh()
     if not exe:
-        sys.exit("找不到 gh：先配环境（python3 scripts/doctor.py 看缺什么）")
+        sys.exit("找不到 gh：brew install gh 或 bash scripts/setup.sh，再 gh auth login")
     code, out, err = run([exe] + list(args), input=input)
     if check and code != 0:
         sys.exit("gh %s 失败：%s" % (" ".join(args[:3]), err.strip()))
@@ -201,15 +199,6 @@ def status_of(state, labels):
     return "todo"
 
 
-def last_device(n):
-    """该 issue 最近一条开始闯关评论里的设备名"""
-    d = gh_json("issue", "view", str(n), "--json", "comments")
-    for c in reversed(d["comments"]):
-        if c["body"].startswith(START_MARK):
-            return c["body"][len(START_MARK):].split()[0]
-    return ""
-
-
 def cmd_status(a):
     cards = load_cards()
     mp = load_map()
@@ -246,10 +235,6 @@ def cmd_status(a):
         if m == len(ucards) and bs != "done":
             recs["boss"].append({"id": key + "-boss", "title": "BOSS · " + unit})
     print("\n总进度：%d/%d（%.0f%%）" % (done, total, 100.0 * done / total if total else 0))
-    for i, c in enumerate(recs["doing"]):
-        who = last_device(mp[c["id"]])
-        if who:
-            recs["doing"][i] = dict(c, title="%s（在 %s 上开始）" % (c["title"], who))
     errata = sorted(tid for tid, n in mp.items() if L_ERRATUM in states.get(n, ("", set()))[1])
     if errata:
         print("待修卡片勘误：%s" % ", ".join(errata))
@@ -280,7 +265,6 @@ def cmd_set(a):
     if a.to == "start":
         gh("issue", "reopen", n, check=False)
         gh("issue", "edit", n, "--add-label", L_DOING, "--remove-label", L_REVIEW)
-        gh("issue", "comment", n, "--body", START_MARK + device_name())
     elif a.to == "review":
         gh("issue", "reopen", n, check=False)
         gh("issue", "edit", n, "--add-label", L_REVIEW, "--remove-label", L_DOING)
@@ -324,7 +308,7 @@ def cmd_clear_labels(a):
 
 
 def read_body(a):
-    """--file 优先（Windows PowerShell 管道会把中文弄乱），否则读标准输入"""
+    """--file 优先，否则读标准输入"""
     if a.file:
         with open(a.file, encoding="utf-8-sig") as f:
             return f.read().strip()
@@ -350,7 +334,7 @@ def cmd_erratum(a):
     gh("label", "create", L_ERRATUM, "--color", LABELS[L_ERRATUM][0],
        "--description", LABELS[L_ERRATUM][1], check=False)
     gh("issue", "edit", n, "--add-label", L_ERRATUM)
-    body = "📝 **卡片勘误**（设备：%s）\n\n%s" % (device_name(), body)
+    body = "📝 **卡片勘误**\n\n" + body
     print(gh("issue", "comment", n, "--body-file", "-", input=body).strip())
 
 

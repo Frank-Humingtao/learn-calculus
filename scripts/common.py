@@ -37,10 +37,10 @@ def ffmpeg_exe():
         raise SystemExit("找不到 ffmpeg：先运行 bash scripts/setup.sh 并 source .venv/bin/activate")
 
 
-# ---------- 跨平台：UTF-8 输出、gh、设备名 ----------
+# ---------- UTF-8 输出、gh ----------
 
 def utf8_stdio():
-    """Windows PowerShell 默认非 UTF-8，中文会乱码或报错"""
+    """保证中文输出不乱码"""
     import sys
     for s in (sys.stdout, sys.stderr):
         try:
@@ -69,18 +69,3 @@ def run(cmd, input=None):
         return 127, "", str(e)
     return p.returncode, p.stdout, p.stderr
 
-
-DEVICE_FILE = os.path.join(ROOT, ".learn-device")
-
-
-def device_name():
-    """本设备的名字：.learn-device 第一行，缺省 hostname"""
-    import socket
-    try:
-        with open(DEVICE_FILE, encoding="utf-8") as f:
-            name = f.readline().strip()
-        if name:
-            return name
-    except OSError:
-        pass
-    return socket.gethostname()

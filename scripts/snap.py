@@ -81,7 +81,7 @@ def main():
 
     chrome = find_chrome()
     if not chrome:
-        sys.exit("找不到 Chrome / Chromium：这台设备截不了图，笔记里就不放这张可视化")
+        sys.exit("找不到 Chrome / Chromium：本机截不了图，笔记里就不放这张可视化")
     with open(a.html, encoding="utf-8") as f:
         src = f.read()
     if re.search(r"<html", src, re.I):

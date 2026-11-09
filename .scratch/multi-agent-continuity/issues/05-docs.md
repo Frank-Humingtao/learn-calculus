@@ -1,5 +1,5 @@
 # AGENTS、README、DESIGN、ADR、setup.sh
 
-Status: ready-for-agent
+Status: wontfix
 
 见 ../spec.md 对应条目。

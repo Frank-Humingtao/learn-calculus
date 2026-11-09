@@ -7,7 +7,7 @@ description: 备课：把 course/sources/ 里的视频和 PDF 提取成文字与
 
 备课分 5 步，**第 4 步必须停下来等学习者审核**。每步产物都落盘，中断后可从断点继续：先看哪些产物已存在。
 
-先 `source .venv/bin/activate`，再 `python3 scripts/doctor.py --prep` 确认备课档齐全。`course/sources/` 是空的（比如在新 worktree 或新设备上）就先 `python3 scripts/sources.py pull` 取回已有原件。
+先 `source .venv/bin/activate`（没有 `.venv` 就 `bash scripts/setup.sh`）。原始素材只在主目录（`git worktree list` 第一行）的 `course/sources/`；在 worktree 里备课时，提取命令直接用主目录里的素材路径。
 
 ## 1. 提取（本地，不读内容）
 
@@ -110,20 +110,14 @@ python3 scripts/tracker.py publish             # 建 milestone + issue，写入 
 
 然后 `git add course && git commit && git push`。
 
-最后发布原始素材，让别的设备能下载原件（`course/sources/` 不进 git，见 `docs/adr/0001-sources-via-github-release.md`）：
-
-```bash
-python3 scripts/sources.py publish    # 打包成下一个 sources-vN 上传，几百 MB 时要十几分钟，放后台跑
-```
-
 告诉学习者备课完成，建议下一步做摸底（`learn-diagnose`）。
 
 ## 增量更新
 
 后来又加了素材：只对新素材做 1–2 步，再把它挂到已有卡片的“学习路径”上；确实有新内容才新增关卡（新增也要先让学习者确认）。**已发布关卡的 id 不改不删。**
 
-增量备课同样以 `git push` 和 `sources.py publish` 收尾。
+增量备课同样以 `git push` 收尾。
 
 ## 处理卡片勘误
 
-别的设备学习时发现的卡片问题记在 issue 上（label `卡片勘误`）。备课时先 `python3 scripts/tracker.py status` 看“待修卡片勘误”，逐个 `tracker.py show <id>` 读勘误评论，改卡片，提交后 `tracker.py erratum <id> --fixed`。
+闯关时发现的卡片问题记在 issue 上（label `卡片勘误`）。备课时先 `python3 scripts/tracker.py status` 看“待修卡片勘误”，逐个 `tracker.py show <id>` 读勘误评论，改卡片，提交后 `tracker.py erratum <id> --fixed`。
