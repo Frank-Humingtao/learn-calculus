@@ -1,10 +1,9 @@
 #!/bin/bash
-# 备课档（只在 macOS / Apple Silicon 上需要；只学习的设备不用跑，见 .agents/skills/learn-setup）
+# 备课档（macOS / Apple Silicon）
 # 安装本地工具（不需要 sudo / Homebrew）：
 #   .venv：pymupdf（PDF）、mlx-whisper（转写）、imageio-ffmpeg（自带 ffmpeg）
 #   ~/.local/bin/gh：GitHub CLI（没有时顺便装上）
 # 扫描版 PDF 另需 MinerU（mineru-kit），见 scripts/ocr_pdf.py
-# 装完用 python3 scripts/doctor.py --prep 检查
 set -e
 cd "$(dirname "$0")/.."
 

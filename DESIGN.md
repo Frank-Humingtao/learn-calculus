@@ -1,6 +1,6 @@
 # 设计文档
 
-本仓库是一个由 AI 导师（Claude Code 或 Codex）驱动的个人学习系统，第一门课是微积分。
+本仓库是一个由 AI 导师（Mac 上的 Claude Code）驱动的个人学习系统，第一门课是微积分。
 设计于 2026-11-04 与学习者逐条讨论确定，改动设计前先更新本文件。
 
 ## 目标
@@ -8,28 +8,30 @@
 - 学习者丢进一堆素材（多本 PDF 教材、几十节视频课），AI 先**备课**：消化素材、梳理成一套框架，再拆成一个个 10–20 分钟的**关卡**。
 - 学习者自由选关闯关：对话学、看原视频片段、读原文都可以；不强制打卡。
 - **掌握与否由学习者决定**：他说“我懂了”就标记；测试和摸底只给建议。
-- 每个对话只开一关；进度存在 GitHub Issues，与对话记忆无关，所以任意开新对话、在 Claude 或 Codex 里都能接着学。
+- 每个对话只开一关；进度存在 GitHub Issues，与对话记忆无关，所以任意开新对话都能接着学。
 
 ## 决定
 
 | 主题 | 决定 |
 |---|---|
 | 形态 | 一个 git 仓库，推到 GitHub 私有仓库，并设为 template repo。新课程用模板生成新仓库，清空 `course/` 即可 |
-| 工具兼容 | `AGENTS.md` 为主说明（Codex 读），`CLAUDE.md` 只引用它；skills 唯一源在 `.agents/skills/`，`.claude/skills` 是指向它的符号链接；脚本为 Python |
+| 工具 | 2026-11-09 定：只在 Mac 上的 Claude Code 里用（[ADR 0003](docs/adr/0003-mac-claude-code-only.md)）。说明写在 `CLAUDE.md`，skill 放 `.claude/skills/`；脚本为 Python |
 | 学习者 | 只有一人 |
-| 课程 | 一个仓库一门课；通用部分（`.agents/` `scripts/` `AGENTS.md`）与课程部分（`course/`）严格分目录 |
+| 课程 | 一个仓库一门课；通用部分（`.claude/skills/` `scripts/` `CLAUDE.md`）与课程部分（`course/`）严格分目录 |
 | 素材处理 | 全部本地、不花 token：视频优先用字幕，否则 mlx-whisper 转写；ffmpeg 场景检测截板书关键帧；PDF 用文字层，扫描版用 MinerU。不用 NotebookLM，不用 Gemini API |
-| git | 原始视频/PDF 不提交，打包放 GitHub Release `sources-vN`（[ADR 0001](docs/adr/0001-sources-via-github-release.md)）；提取文字、关键帧、备课产物提交 |
+| git | 原始视频/PDF 不提交，只存在主目录的 `course/sources/`（GitHub Release `sources-v1` 是一份不再更新的冷备份）；提取文字、关键帧、备课产物提交 |
 | 备课 | 分层：每份素材（每节课/每章）先摘要 → 合并对齐多份素材 → 生成 `course/SYLLABUS.md` **交学习者审核** → 确认后生成关卡卡片和 issue |
 | 关卡卡片 | `course/levels/<id>.md`：核心问题、范围（讲什么/不讲什么）、通关标准 2–4 条、多条学习路径（视频时间段+关键帧 / 教材页码 / 对话要点，注明覆盖哪些标准）、常见误区、前置/后续 |
 | 进度 | GitHub Issues：一关一 issue（正文=核心问题+通关标准+卡片链接），单元=milestone，每单元一个 `boss` 阶段测试 issue |
 | 状态 | 未开始=open 无状态 label；进行中=`进行中`；待复习=`待复习`；已掌握=closed。只由学习者决定，他也可在网页上直接改 |
 | 记录 | 每次闯关/测试后在 issue 下评论：学习路径、复述缺口、题目全文、对错与错因 |
-| 笔记 | 2026-11-08 定：给学习者回看的另开「笔记」issue（每关一个，label `笔记`，一直 open），只收错题过程、手写照片、关键可视化截图、他要求记下的感悟；图片经 API 存孤立分支 `note-images`。只在 Claude 上写。见 `docs/adr/0002` |
+| 笔记 | 2026-11-08 定：给学习者回看的另开「笔记」issue（每关一个，label `笔记`，一直 open），只收错题过程、手写照片、关键可视化截图、他要求记下的感悟；图片经 API 存孤立分支 `note-images`。见 `docs/adr/0002` |
 | 摸底 | 全课摸底（框架建好后一次）+ 单元摸底（每单元开学前，概念题为主、至多一道动手题）。判断先当面说，学习者决定跳过哪些（→ 已掌握）、从哪开始（→ label `摸底:从这开始`），再记录 |
 | 教学 | 一次一题；先问已知 → 选路径学 → 学习者复述、AI 只补缺口 → 出题（计算 / 概念判断（干扰项来自误区）/ 解释为什么 / 迁移）→ 答错先讲解再换形式重问。默认讲解式，学习者说“引导我”切苏格拉底式 |
 | 复习 | 不做定时复习（理解型理工科内容） |
-| 多设备 | 2026-11-07 定：Mac（Claude Code）、Windows（Codex，PowerShell）、Linux 云电脑（Grok bot）、Cursor 云 Agent 都能接着学。依赖分两档：学习档 = python3 标准库 + git + gh，三平台通用；备课档只在 Mac。`scripts/doctor.py` 自检，`learn-setup`（配环境）补齐、`learn-update`（检查更新）拉新。学习设备不改仓库文件，卡片有错打 label `卡片勘误`；`set start` 评论带设备名（`.learn-device`），不加锁 |
+| 对话开头 | 静默检查本地是否落后 `origin/main`（落后才说一句“先在主目录 git pull”）→ 看进度 → 建议一关 |
+| 显示 | 聊天里的数学一律用 show_widget + KaTeX 卡片，正文只放文字；issue 和笔记里用 LaTeX |
+| 卡片勘误 | 闯关时不改仓库文件（常在 worktree 里），卡片有错打 label `卡片勘误`，下次备课统一改 |
 
 ## 参考
 
@@ -41,6 +43,6 @@
 
 - 多学习者、多课程同仓库
 - 给纯聊天、跑不了命令的 bot 做接口
-- 多设备之间的关卡锁
+- 多设备、多工具（Codex、Windows、云电脑、bot）：2026-11-07 试过，11-09 撤回，见 ADR 0003
 - 间隔复习算法（FSRS 等）
 - 进度可视化页面（GitHub Projects 看板可直接用）

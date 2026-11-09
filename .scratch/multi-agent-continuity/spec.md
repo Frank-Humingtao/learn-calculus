@@ -1,6 +1,8 @@
 # 多设备、多 agent 接着学
 
-Status: ready-for-agent
+Status: wontfix
+
+> 2026-11-09 撤回：只在 Mac 上的 Claude Code 里用，多设备那一层已删，见 docs/adr/0003-mac-claude-code-only.md。
 
 ## 目标
 
