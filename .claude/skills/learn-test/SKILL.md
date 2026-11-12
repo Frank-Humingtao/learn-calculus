@@ -47,6 +47,6 @@ description: 测试：对某一关做小测，或打某单元的 boss 阶段测�
    EOF
    ```
 
-2. 写笔记：照 `../learn-level/note.md` 把错题、手写照片、关键可视化收进 `tracker.py note <id>`；boss 测试写在 `<单元号>-boss` 的笔记里。全对又没图就不写。
+2. 写笔记：照 `../learn-level/note.md` 把这次每道题（不论对错）、全部手写照片、关键推导和可视化、方法小结收进 `tracker.py note <id>`；boss 测试写在 `<单元号>-boss` 的笔记里。没出过题才不写；全对也要写，每题带题面和关键步骤。
 
 3. 给建议但**不自己改状态**：例如“第 2、4 题暴露 δ 的选取还不熟，建议把 02-03 改成待复习，要改吗？”他同意才 `tracker.py set <id> review`（或 `done`）。boss 他认为过了就 `set <单元号>-boss done`。
