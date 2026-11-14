@@ -451,7 +451,7 @@ def note_issue(tid, intro):
         if not c:
             sys.exit("找不到关卡 %s 的卡片" % tid)
         unit, title, head = c["unit"], c["title"], "**核心问题**：%s" % c["question"]
-    body = "%s\n\n%s📌 关卡与学习进度：#%s\n" % (head, (intro.strip() + "\n\n") if intro else "", n)
+    body = gh_math("%s\n\n%s📌 关卡与学习进度：#%s\n" % (head, (intro.strip() + "\n\n") if intro else "", n))
     ensure_label(L_NOTE)
     args = ["issue", "create", "--title", "[%s] %s · 笔记" % (tid, title), "--body", body, "--label", L_NOTE]
     if unit:
@@ -469,7 +469,7 @@ def cmd_note(a):
     for p in a.image:
         if not os.path.isfile(p):
             sys.exit("图片不存在：%s" % p)
-    n = note_issue(a.id, gh_math(a.intro))
+    n = note_issue(a.id, a.intro)
     if a.image:
         img_repo = ensure_image_repo(repo_name())
         stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
