@@ -17,7 +17,7 @@
 状态：未开始=open 无状态 label；进行中=label「进行中」；待复习=label「待复习」；已掌握=closed
 关卡 id 与 issue 编号的对应保存在 course/issues.json。
 笔记 issue 带 label「笔记」、与关卡同 milestone、一直 open，按标题前缀 [<id>] 查找（不进 issues.json）。
-笔记里的图片经 gh api 存到 note-images 分支的 <id>/ 下；正文里写 {{img1}} {{img2}} … 指定位置，没写的追加在末尾。
+笔记里的图片经 gh api 存到公开仓库 <本仓库名>-note-images 的 <id>/ 下（私有仓库的图手机 App 显示不出来）；正文里写 {{img1}} {{img2}} … 指定位置，没写的追加在末尾。
 """
 import argparse
 import glob
@@ -35,7 +35,7 @@ L_SKIP, L_START = "摸底:可跳过", "摸底:从这开始"
 L_LEVEL, L_BOSS = "关卡", "boss"
 L_ERRATUM = "卡片勘误"
 L_NOTE = "笔记"
-NOTE_BRANCH = "note-images"
+IMAGE_REPO_SUFFIX = "-note-images"
 LABELS = {
     L_LEVEL: ("ededed", "一个关卡"),
     L_BOSS: ("b60205", "单元阶段测试"),
@@ -348,17 +348,14 @@ def repo_name():
     return gh_json("repo", "view", "--json", "nameWithOwner")["nameWithOwner"]
 
 
-def ensure_note_branch():
-    """note-images 是孤立分支（不含代码），第一次用时经 API 创建"""
-    code, _, _ = run([find_gh(), "api", "repos/{owner}/{repo}/git/ref/heads/" + NOTE_BRANCH])
-    if code == 0:
-        return
-    readme = "笔记图片，由 scripts/tracker.py note 上传；按关卡 id 分目录。不要合并进 main。\n"
-    blob = gh_json("api", "repos/{owner}/{repo}/git/blobs", "-f", "content=" + readme, "-f", "encoding=utf-8")["sha"]
-    tree = gh_json("api", "repos/{owner}/{repo}/git/trees", "-f", "tree[][path]=README.md",
-                   "-f", "tree[][mode]=100644", "-f", "tree[][type]=blob", "-f", "tree[][sha]=" + blob)["sha"]
-    commit = gh_json("api", "repos/{owner}/{repo}/git/commits", "-f", "message=笔记图片分支", "-f", "tree=" + tree)["sha"]
-    gh("api", "repos/{owner}/{repo}/git/refs", "-f", "ref=refs/heads/" + NOTE_BRANCH, "-f", "sha=" + commit)
+def ensure_image_repo(repo):
+    """图片放在公开仓库 <repo>-note-images：私有仓库的图片链接要登录，GitHub 手机 App 显示不出来。第一次用时创建"""
+    img = repo + IMAGE_REPO_SUFFIX
+    code, _, _ = run([find_gh(), "api", "repos/" + img])
+    if code != 0:
+        gh("repo", "create", img, "--public", "--description", "%s 笔记里的图片，由 scripts/tracker.py note 上传" % repo)
+        print("+ 新建公开图片仓库 https://github.com/%s（只放笔记图片）" % img)
+    return img
 
 
 def shrink(path):
@@ -372,15 +369,15 @@ def shrink(path):
     return out if code == 0 and os.path.getsize(out) < os.path.getsize(path) else path
 
 
-def upload_image(repo, tid, path, stamp, i):
+def upload_image(img_repo, tid, path, stamp, i):
     import base64
     ext = os.path.splitext(path)[1].lower() or ".png"
     dest = "%s/%s-%d%s" % (tid, stamp, i, ext)
     with open(shrink(path), "rb") as f:
-        payload = json.dumps({"message": "笔记图片 " + dest, "branch": NOTE_BRANCH,
-                              "content": base64.b64encode(f.read()).decode()})
-    gh("api", "-X", "PUT", "repos/{owner}/{repo}/contents/" + dest, "--input", "-", input=payload)
-    return "https://github.com/%s/blob/%s/%s?raw=true" % (repo, NOTE_BRANCH, dest)
+        payload = json.dumps({"message": "笔记图片 " + dest, "content": base64.b64encode(f.read()).decode()})
+    gh("api", "-X", "PUT", "repos/%s/contents/%s" % (img_repo, dest), "--input", "-", input=payload)
+    branch = gh_json("api", "repos/" + img_repo)["default_branch"]
+    return "https://raw.githubusercontent.com/%s/%s/%s" % (img_repo, branch, dest)
 
 
 def note_issue(tid, intro):
@@ -420,11 +417,10 @@ def cmd_note(a):
             sys.exit("图片不存在：%s" % p)
     n = note_issue(a.id, a.intro)
     if a.image:
-        ensure_note_branch()
-        repo = repo_name()
+        img_repo = ensure_image_repo(repo_name())
         stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         for i, p in enumerate(a.image, 1):
-            md = "![](%s)" % upload_image(repo, a.id, p, stamp, i)
+            md = "![](%s)" % upload_image(img_repo, a.id, p, stamp, i)
             ph = "{{img%d}}" % i
             body = body.replace(ph, md) if ph in body else (body + "\n\n" + md).strip()
     print(gh("issue", "comment", n, "--body-file", "-", input=body).strip())

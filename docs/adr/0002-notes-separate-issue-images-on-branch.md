@@ -1,5 +1,7 @@
 # 笔记单独开 issue，图片经 API 存到孤立分支 note-images
 
+> 图片存放部分已被 [0004](0004-note-images-public-repo.md) 取代：改存公开仓库 `<仓库名>-note-images`。
+
 学习者经常回看关卡 issue，但学习记录是写给导师的压缩格式，人看着累；而他又想把手写解题照片、导师做的可视化留下来。于是给学习者的东西单独成为「笔记」：每关一个笔记 issue（label `笔记`、同 milestone、一直 open），关卡 issue 和状态照旧只给导师用，导师平时不读笔记，上下文不变大。
 
 图片是难点：仓库是私有的，GitHub 网页拖拽上传的附件没有命令行接口。所以 `tracker.py note` 用 `gh api` 把图片直接写进孤立分支 `note-images`（`<关卡id>/<时间>-<序号>.png`），笔记里用 `https://github.com/<repo>/blob/note-images/...?raw=true` 引用。2026-11-08 学习者实测：这种链接和 `/raw/` 链接都能显示，`raw.githubusercontent.com` 不行（私有仓库要 token）。
