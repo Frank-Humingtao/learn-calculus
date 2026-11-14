@@ -307,12 +307,66 @@ def cmd_clear_labels(a):
     print("✓ 单元 %s：清掉 %d 关的摸底标注" % (unit, n_cleared))
 
 
+_PROTECT = re.compile(r"\$`[^`\n]*`\$|(`+).+?\1")
+_INLINE = re.compile(r"(?<![\\$])\$(?!\$)([^$`\n]+?)(?<![\\$])\$(?!\$)")
+
+
+def _inline_math(seg):
+    return _INLINE.sub(lambda m: "$`%s`$" % m.group(1), seg)
+
+
+def gh_math(text):
+    """让公式在 GitHub 上一定渲染：
+    - 行内 $x$ → $`x`$：GitHub 要求开头的 $ 前面是空白或 ASCII，紧挨中文字、全角标点（：，；（）就不认；
+      $`x`$ 写法不受影响。
+    - 独占一行的 $$ 块前后补空行：块前没空行时 GitHub 当普通段落。
+    代码块、行内代码、已是 $`x`$ 的不动。"""
+    out, fence, display = [], False, False
+
+    def blank_before():
+        if out and out[-1].strip():
+            out.append("")
+
+    for line in text.split("\n"):
+        s = line.strip()
+        if s.startswith("```") and not display:
+            fence = not fence
+            out.append(line)
+            continue
+        if fence:
+            out.append(line)
+            continue
+        if display:
+            out.append(line)
+            if s == "$$":
+                display = False
+                out.append("")
+            continue
+        if s == "$$" or (s.startswith("$$") and not s.endswith("$$")):
+            blank_before()
+            out.append(line)
+            display = True
+            continue
+        if len(s) > 4 and s.startswith("$$") and s.endswith("$$"):
+            blank_before()
+            out.extend([line, ""])
+            continue
+        pos, buf = 0, []
+        for m in _PROTECT.finditer(line):
+            buf.append(_inline_math(line[pos:m.start()]))
+            buf.append(m.group(0))
+            pos = m.end()
+        buf.append(_inline_math(line[pos:]))
+        out.append("".join(buf))
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(out)).strip()
+
+
 def read_body(a):
-    """--file 优先，否则读标准输入"""
+    """--file 优先，否则读标准输入；公式规整成 GitHub 能渲染的写法（见 gh_math）"""
     if a.file:
         with open(a.file, encoding="utf-8-sig") as f:
-            return f.read().strip()
-    return sys.stdin.read().strip()
+            return gh_math(f.read().strip())
+    return gh_math(sys.stdin.read().strip())
 
 
 def cmd_comment(a):
@@ -415,7 +469,7 @@ def cmd_note(a):
     for p in a.image:
         if not os.path.isfile(p):
             sys.exit("图片不存在：%s" % p)
-    n = note_issue(a.id, a.intro)
+    n = note_issue(a.id, gh_math(a.intro))
     if a.image:
         img_repo = ensure_image_repo(repo_name())
         stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
