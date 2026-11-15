@@ -419,8 +419,10 @@ def shrink(path):
     if not shutil.which("sips") or not path.lower().endswith((".png", ".jpg", ".jpeg")):
         return path
     out = os.path.join(tempfile.mkdtemp(), os.path.basename(path))
-    code, _, _ = run(["sips", "-Z", "1600", path, "--out", out])
-    return out if code == 0 and os.path.getsize(out) < os.path.getsize(path) else path
+    # run() 在仓库根目录执行，路径必须是绝对的；sips 读不到输入时仍返回 0，所以还要看输出是否存在
+    code, _, _ = run(["sips", "-Z", "1600", os.path.abspath(path), "--out", out])
+    ok = code == 0 and os.path.isfile(out) and os.path.getsize(out) < os.path.getsize(path)
+    return out if ok else path
 
 
 def upload_image(img_repo, tid, path, stamp, i):
@@ -466,6 +468,7 @@ def cmd_note(a):
     body = read_body(a) if (a.file or not sys.stdin.isatty()) else ""
     if not body and not a.image:
         sys.exit("笔记为空：没有正文也没有图片就不写")
+    a.image = [os.path.abspath(p) for p in a.image]
     for p in a.image:
         if not os.path.isfile(p):
             sys.exit("图片不存在：%s" % p)
