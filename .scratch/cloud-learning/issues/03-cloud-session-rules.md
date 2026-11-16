@@ -9,7 +9,7 @@
 
 **Blocked by:** 01
 
-**Status:** needs-triage（等 01 结论；结论为“继续”后改为 ready-for-agent）
+**Status:** wontfix（01 实测后学习者决定放弃云端学习，见 01 的 Comments）
 
 - [ ] 在云端会话里出一道带公式的题，显示方式符合新规则
 - [ ] 在云端会话里开场，不出现 git pull 提醒，也不尝试调用切视频脚本

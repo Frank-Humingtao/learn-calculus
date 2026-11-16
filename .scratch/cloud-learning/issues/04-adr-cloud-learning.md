@@ -10,7 +10,7 @@
 
 **Blocked by:** 02, 03
 
-**Status:** needs-triage（等 01 结论；结论为“继续”后改为 ready-for-agent）
+**Status:** wontfix（01 实测后学习者决定放弃云端学习，见 01 的 Comments）
 
 - [ ] 新 ADR 写好，编号接在现有 ADR 之后
 - [ ] ADR 0003 顶部注明哪部分已被新 ADR 取代
