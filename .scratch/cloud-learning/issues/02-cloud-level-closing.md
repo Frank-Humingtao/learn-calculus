@@ -9,7 +9,7 @@
 
 **Blocked by:** 01
 
-**Status:** needs-triage（等 01 结论；结论为“继续”后改为 ready-for-agent）
+**Status:** wontfix（01 实测后学习者决定放弃云端学习，见 01 的 Comments）
 
 - [ ] 云端会话里 `tracker.py` 的 status / show / set / comment / erratum 正常工作
 - [ ] 云端会话里 `tracker.py note` 能发笔记，HEIC 和 JPEG 照片都能显示在笔记 issue 里（GitHub 手机 App 能看到）
