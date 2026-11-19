@@ -260,20 +260,53 @@ def cmd_show(a):
         print("—— %s ——\n%s\n" % (c["createdAt"][:10], c["body"]))
 
 
+def issue_state(n):
+    """issue 当前的 (state, labels)，state 为 OPEN / CLOSED"""
+    d = gh_json("issue", "view", n, "--json", "state,labels")
+    return d["state"], {l["name"] for l in d["labels"]}
+
+
+def ensure_state(n, want, tries=3):
+    """把 issue 开/关到 want（OPEN/CLOSED）：已经是就不动；失败重试，最终没变就报错退出"""
+    import time
+    if issue_state(n)[0] == want:
+        return
+    verb = ["close", n, "--reason", "completed"] if want == "CLOSED" else ["reopen", n]
+    err = ""
+    for i in range(tries):
+        exe = find_gh()
+        code, _, err = run([exe, "issue"] + verb)
+        if code == 0 and issue_state(n)[0] == want:
+            return
+        if i < tries - 1:
+            time.sleep(2 * (i + 1))
+    sys.exit("issue #%s 没能%s（试了 %d 次）：%s" % (
+        n, "关闭" if want == "CLOSED" else "重新打开", tries, err.strip() or "状态未变"))
+
+
 def cmd_set(a):
     n = issue_no(a.id)
     if a.to == "start":
-        gh("issue", "reopen", n, check=False)
+        ensure_state(n, "OPEN")
         gh("issue", "edit", n, "--add-label", L_DOING, "--remove-label", L_REVIEW)
+        want = ("OPEN", {L_DOING}, {L_REVIEW})
     elif a.to == "review":
-        gh("issue", "reopen", n, check=False)
+        ensure_state(n, "OPEN")
         gh("issue", "edit", n, "--add-label", L_REVIEW, "--remove-label", L_DOING)
+        want = ("OPEN", {L_REVIEW}, {L_DOING})
     elif a.to == "todo":
-        gh("issue", "reopen", n, check=False)
+        ensure_state(n, "OPEN")
         gh("issue", "edit", n, "--remove-label", L_DOING + "," + L_REVIEW)
+        want = ("OPEN", set(), {L_DOING, L_REVIEW})
     elif a.to == "done":
         gh("issue", "edit", n, "--remove-label", L_DOING + "," + L_REVIEW)
-        gh("issue", "close", n, "--reason", "completed", check=False)
+        ensure_state(n, "CLOSED")
+        want = ("CLOSED", set(), {L_DOING, L_REVIEW})
+    # 再读一次确认真的改好了，才打 ✓
+    state, labels = issue_state(n)
+    if state != want[0] or not want[1] <= labels or want[2] & labels:
+        sys.exit("✗ %s 设置后核对不符：issue #%s 现在 %s，label：%s" % (
+            a.id, n, state, ", ".join(sorted(labels)) or "无"))
     print("✓ %s → %s %s" % (a.id, ICON[{"start": "doing"}.get(a.to, a.to)], a.to))
 
 
