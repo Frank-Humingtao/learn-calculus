@@ -352,37 +352,53 @@ def gh_math(text):
     """让公式在 GitHub 上一定渲染：
     - 行内 $x$ → $`x`$：GitHub 要求开头的 $ 前面是空白或 ASCII，紧挨中文字、全角标点（：，；（）就不认；
       $`x`$ 写法不受影响。
-    - 独占一行的 $$ 块前后补空行：块前没空行时 GitHub 当普通段落。
+    - $$ 块 → ```math 代码块：$$ 块会先过一遍 markdown 转义，\\, \\; \\{ 等里的反斜杠被吃掉
+      （\\,dt 显示成 ,dt）；```math 块原样交给公式渲染。块前补空行。
     代码块、行内代码、已是 $`x`$ 的不动。"""
-    out, fence, display = [], False, False
+    out, fence, display, indent = [], False, False, ""
 
     def blank_before():
         if out and out[-1].strip():
             out.append("")
 
+    def open_math(line):
+        nonlocal indent
+        indent = line[: len(line) - len(line.lstrip())]
+        blank_before()
+        out.append(indent + "```math")
+
+    def close_math():
+        out.extend([indent + "```", ""])
+
     for line in text.split("\n"):
         s = line.strip()
-        if s.startswith("```") and not display:
+        if display:
+            if s.endswith("$$"):
+                if s[:-2].strip():
+                    out.append(line.rstrip()[:-2].rstrip())
+                close_math()
+                display = False
+            else:
+                out.append(line)
+            continue
+        if s.startswith("```"):
             fence = not fence
             out.append(line)
             continue
         if fence:
             out.append(line)
             continue
-        if display:
-            out.append(line)
-            if s == "$$":
-                display = False
-                out.append("")
-            continue
-        if s == "$$" or (s.startswith("$$") and not s.endswith("$$")):
-            blank_before()
-            out.append(line)
-            display = True
-            continue
-        if len(s) > 4 and s.startswith("$$") and s.endswith("$$"):
-            blank_before()
-            out.extend([line, ""])
+        if s.startswith("$$"):
+            open_math(line)
+            rest = s[2:]
+            if len(rest) >= 2 and rest.endswith("$$"):
+                if rest[:-2].strip():
+                    out.append(indent + rest[:-2].strip())
+                close_math()
+            else:
+                if rest.strip():
+                    out.append(indent + rest.strip())
+                display = True
             continue
         pos, buf = 0, []
         for m in _PROTECT.finditer(line):
