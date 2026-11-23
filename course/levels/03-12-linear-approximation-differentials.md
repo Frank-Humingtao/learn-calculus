@@ -22,7 +22,7 @@ prereqs: [02-12, 03-05]
 - ✏️ 练习：§3.10 习题 p.258–260 第 1、3、5 题（求线性化并估值）、第 7 题（验证 $\tan^{-1}x\approx x$ 并确定精度范围）（覆盖 1、2）
 - ✏️ 练习：同上 第 13、19 题（求微分并代值）、第 23、27 题（比较 $\Delta y$ 与 $dy$）（覆盖 3）
 - ✏️ 练习：同上 第 31、33、36 题（线性近似估值，注意 $\cos29^\circ$ 要换成弧度）、第 41、43 题（测量误差与相对误差）（覆盖 1、4）
-- 💬 对话要点：先让学习者在 Desmos 里把 $\sqrt{x+3}$ 在 $(1,2)$ 附近不断放大，看曲线“变直”，引出“局部线性”。追问：“$\sqrt{3.98}$ 的近似值偏大还是偏小？为什么？”检验他是否会看切线位置。最后让他口述 $dx$、$dy$、$\Delta y$ 三者在图上各是哪条线段。（覆盖 1、2、3）
+- 💬 对话要点：先在 Desmos 里把 $\sqrt{x+3}$ 在 $(1,2)$ 附近不断放大，看曲线“变直”，引出“局部线性”。讲清 $\sqrt{3.98}$ 的线性近似值偏大：$\sqrt{x+3}$ 下凹，切线在曲线上方。讲完让他口述 $dx$、$dy$、$\Delta y$ 三者在图上各是哪条线段来检验（$dx=\Delta x$ 是水平增量，$dy$ 是沿切线的升高，$\Delta y$ 是沿曲线的实际升高）。（覆盖 1、2、3）
 - 🎬 MIT 18.01 第 2 讲：视频 [09:13–13:28](https://www.bilibili.com/video/BV1mNgm66EZu?p=2&t=553)；讲义图 fig2/fig3（讲义 `course/extracted/mit1801/L02/OCW_18.01_L02_讲义_中文.md`，摘要 `course/prep/mit1801-L02.md`）——作为动机补充：$\Delta L\approx\frac{dL}{dh}\Delta h$ 就是微分/误差传播的雏形
 - 🎬 MIT 18.01 第 8 讲：视频 [00:30–16:07](https://www.bilibili.com/video/BV1mNgm66EZu?p=8&t=30)；讲义 Linear Approximation、Example 1、Basic list、Fig 1–2（讲义 `course/extracted/mit1801/L08/OCW_18.01_L08_讲义_中文.md`，摘要 `course/prep/mit1801-L08.md`）——标准 1；三种解读讲透同一公式；$x_0=0$ 五条目录比斯图尔特零散的 $\sin x\approx x$ 更系统
 - 🎬 MIT 18.01 第 8 讲：视频 [16:07–30:18](https://www.bilibili.com/video/BV1mNgm66EZu?p=8&t=967)；讲义 Example 2、4（讲义 `course/extracted/mit1801/L08/OCW_18.01_L08_讲义_中文.md`，摘要 `course/prep/mit1801-L08.md`）——标准 1、4；组合近似“拼目录 + 扔高阶”是斯图尔特没有的技巧；GPS 例的 $\Delta T/T\approx\frac12v^2/c^2$ 是相对误差的真实场景

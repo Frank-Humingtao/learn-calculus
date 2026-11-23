@@ -22,7 +22,7 @@ prereqs: [03-06, 01-06]
 - ✏️ 练习：§3.6 习题 p.224–225 第 81 题（仿照推导证明 $\cos^{-1}$ 的公式）（覆盖 1）
 - ✏️ 练习：同上 第 63、66、68、75、78 题（反三角函数求导与化简）（覆盖 3）
 - ✏️ 练习：同上 第 83 题（反函数求导公式）、第 84、85 题（应用该公式）（覆盖 4）
-- 💬 对话要点：先让学习者回忆 $\arcsin$ 的值域为什么限制在 $[-\pi/2,\pi/2]$，再让他自己写 $\sin y=x$ 两边求导，卡在“$\cos y$ 怎么用 $x$ 表示”时追问“$\cos y=\pm\sqrt{1-x^2}$ 取哪个号，为什么”。可以用反函数图像关于 $y=x$ 对称、切线斜率互为倒数来给出几何直观，并顺势引出练习 83 的一般公式。（覆盖 1、2、4）
+- 💬 对话要点：先回顾 $\arcsin$ 的值域为什么限制在 $[-\pi/2,\pi/2]$（要单调才有反函数），再示范 $\sin y=x$ 两边求导得 $y'=\frac1{\cos y}$，讲清 $\cos y=\pm\sqrt{1-x^2}$ 取正号，因为 $y\in[-\pi/2,\pi/2]$ 时 $\cos y\ge0$，所以 $(\arcsin x)'=\frac1{\sqrt{1-x^2}}$。可以用反函数图像关于 $y=x$ 对称、切线斜率互为倒数来给出几何直观，并顺势引出练习 83 的一般公式。（覆盖 1、2、4）
 - 🎬 MIT 18.01 第 5 讲：视频 [27:46–38:34](https://www.bilibili.com/video/BV1mNgm66EZu?p=5&t=1666)；讲义 Inverse Functions、arctan 例（讲义 `course/extracted/mit1801/L05/OCW_18.01_L05_讲义_中文.md`，摘要 `course/prep/mit1801-L05.md`）——标准 1（$\arcsin$ 推导，根号符号须导师补）、2（$\arctan'=\frac1{1+x^2}$）、4（讲义的 $\frac{d}{dy}f^{-1}=\frac1{dy/dx}$）
 - 🎬 MIT 18.01 第 7 讲：视频 [37:52–40:13](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=2272)；讲义 $\sin^{-1}$ 推导（讲义 `course/extracted/mit1801/L07/OCW_18.01_L07_讲义_中文.md`，摘要 `course/prep/mit1801-L07.md`）——标准 1、2；直角三角形换回 $x$ 的做法，教授写错再改的真实过程
 - 🎬 MIT 18.01 第 35 讲：讲义 $\frac\pi2=\int_0^1\frac{dx}{\sqrt{1-x^2}}$（讲义 `course/extracted/mit1801/L35/OCW_18.01_L35_讲义_中文.md`，摘要 `course/prep/mit1801-L35.md`）——补充：$\arcsin$ 导数的一个应用；级数部分超出上册

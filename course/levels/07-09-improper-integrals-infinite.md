@@ -20,7 +20,7 @@ prereqs: [05-06, 02-10, 07-01, 04-05]
 - 📖 阅读：§7.8 p.542–546 `course/sources/stewart9/072 07 积分技巧 - 7.08 反常积分.pdf`（文字版 `course/extracted/072 07 积分技巧 - 7.08 反常积分.md`），重点 引例与定义 1 p.542–543、例1 p.543–544、例2 p.544、例3 p.545（覆盖 1、2、3）
 - 📖 阅读：例4 与 p-积分总结 p.545–546（覆盖 4）
 - ✏️ 练习：§7.8 习题 p.549–552 第 3 题（面积随 $t$ 的变化，覆盖 1）；第 5、9、20 题（收敛/发散；$\int_{-\infty}^{+\infty}\frac{x}{x^2+1}$，覆盖 1、3）；第 27、30 题（分部 + 洛必达，覆盖 2）；第 32 题（换元后归结为 p-型，覆盖 4）
-- 💬 对话要点：先画 $y=\frac1x$ 与 $y=\frac1{x^2}$，问“两条曲线都趋于 0，尾巴下的面积都有限吗？”让学习者先猜再算。强调定义就是“先算到 $t$，再让 $t\to\infty$”。追问 $\int_{-\infty}^{+\infty}x\,dx$ 是否等于 0，引出必须拆成两段（柯西主值见练习 73，可作拓展）。
+- 💬 对话要点：先画 $y=\frac1x$ 与 $y=\frac1{x^2}$，讲清两条曲线都趋于 0，但尾巴下的面积一个无限（$\int_1^\infty\frac1x dx$ 发散）、一个有限（$\int_1^\infty\frac1{x^2}dx=1$），再算出来验证。强调定义就是“先算到 $t$，再让 $t\to\infty$”。讲清 $\int_{-\infty}^{+\infty}x\,dx$ 不等于 0：必须拆成两段且两段都收敛才算收敛，而 $\int_0^{+\infty}x\,dx$ 发散，所以它发散（柯西主值见练习 73，可作拓展）。
 - 🎬 MIT 18.01 第 22 讲：视频 [14:06–18:33](https://www.bilibili.com/video/BV1mNgm66EZu?p=22&t=846)（讲义 `course/extracted/mit1801/L22/OCW_18.01_L22_讲义_中文.md`，摘要 `course/prep/mit1801-L22.md`）——标准 1 的直观引子：$\int_0^\infty re^{-r^2}dr$ 收敛，所以“整体”可以取到无穷
 - 🎬 MIT 18.01 第 32 讲：视频 [05:27–11:42](https://www.bilibili.com/video/BV1mNgm66EZu?p=32&t=327)；讲义 Definition、Example 1（讲义 `course/extracted/mit1801/L32/OCW_18.01_L32_讲义_中文.md`，摘要 `course/prep/mit1801-L32.md`）——标准 1：定义 + 面积直观；“把 $\infty$ 当端点”的简写及其条件，正对误区“把 $\infty$ 直接代入不写极限”
 - 🎬 MIT 18.01 第 32 讲：视频 [11:43–14:03](https://www.bilibili.com/video/BV1mNgm66EZu?p=32&t=703)（讲义 `course/extracted/mit1801/L32/OCW_18.01_L32_讲义_中文.md`，摘要 `course/prep/mit1801-L32.md`）——标准 1：三段真实 Q&A 澄清“收敛 = 极限有限”
