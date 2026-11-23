@@ -23,7 +23,7 @@ prereqs: [03-03, 01-03, 03-02, 03-04]
 - ✏️ 练习：§3.4 习题 p.206–209 第 1–6 题中挑 3 题（拆成 $f(g(x))$）（覆盖 2）
 - ✏️ 练习：同上 第 13、14、16、21、27、45 题（单层到多层、与积商组合、一般指数）（覆盖 2、3、4）
 - ✏️ 练习：同上 第 67、69 题（由函数值表求复合函数导数值）、第 83 题（$\cos2x$ 的 50 阶导）（覆盖 3）
-- 💬 对话要点：用齿轮或换算单位类比（“$x$ 每走 1，$u$ 走 3；$u$ 每走 1，$y$ 走 2；那 $x$ 每走 1，$y$ 走几”）切入。练习时让学习者先口头说出外层和内层再动笔，重点追问 $\sin(x^2)$ 与 $\sin^2x$ 谁是外层。检验时给 $e^{\sec3\theta}$，要求他数出有几层、每层导数分别是什么。（覆盖 1、2、3）
+- 💬 对话要点：用齿轮或换算单位类比（“$x$ 每走 1，$u$ 走 3；$u$ 每走 1，$y$ 走 2；那 $x$ 每走 1，$y$ 走 6”）切入。示范先口头说出外层和内层再动笔，重点讲清 $\sin(x^2)$ 外层是 $\sin$、内层是 $x^2$，而 $\sin^2x$ 外层是平方、内层是 $\sin x$。讲完用 $e^{\sec3\theta}$ 检验能否数出三层（$e^u$、$\sec v$、$3\theta$）及每层导数（$e^u$、$\sec v\tan v$、$3$）。（覆盖 1、2、3）
 - 🎬 MIT 18.01 第 4 讲：视频 [16:57–25:13](https://www.bilibili.com/video/BV1mNgm66EZu?p=4&t=1017)；讲义 Chain Rule、Example 1–2、图 fig1（讲义 `course/extracted/mit1801/L04/OCW_18.01_L04_讲义_中文.md`，摘要 `course/prep/mit1801-L04.md`）——标准 1（$\frac{\Delta y}{\Delta x}\cdot\frac{\Delta x}{\Delta t}$ 证明——正好拿来问“漏洞在哪”）、标准 2（$\sin^{10}t$ vs $\sin(10t)$，讲义 $\sin(x^2)$ vs $\sin^2x$）
 - 🎬 MIT 18.01 第 6 讲：视频 [22:54–24:59](https://www.bilibili.com/video/BV1mNgm66EZu?p=6&t=1374)；讲义 Method 1（讲义 `course/extracted/mit1801/L06/OCW_18.01_L06_讲义_中文.md`，摘要 `course/prep/mit1801-L06.md`）——标准 4；$a^x=e^{x\ln a}$ 推 $(a^x)'=(\ln a)a^x$，并解释“为何叫自然”（t=1501–1534）
 - 🎬 MIT 18.01 第 7 讲：视频 [15:00–17:01](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=900)；[22:46–24:00](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=1366)；[26:30–28:04](https://www.bilibili.com/video/BV1mNgm66EZu?p=7&t=1590)（讲义 `course/extracted/mit1801/L07/OCW_18.01_L07_讲义_中文.md`，摘要 `course/prep/mit1801-L07.md`）——标准 1（线性例子说明变化率相乘）、3（$(x^{10}+8x)^6$、$e^{x\arctan x}$ 多层组合）

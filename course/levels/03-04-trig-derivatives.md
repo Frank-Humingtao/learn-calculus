@@ -23,7 +23,7 @@ prereqs: [03-03, 02-05]
 - ✏️ 练习：同上 第 27、39 题（切线、水平切线）、第 61 题（$\sin x$ 的 99 阶导）（覆盖 3、4）
 - ✏️ 练习：同上 第 45、47、51、57 题（三角极限）（覆盖 4）
 - ✏️ 挑战（可选）：第 26 题用定义证明 $(\cos x)'=-\sin x$（覆盖 2）
-- 💬 对话要点：先让学习者在 $\sin x$ 图像上逐点估切线斜率、描出 $f'$，问“这条曲线像谁”。然后从定义出发卡在 $\frac{\sin h}{h}$ 和 $\frac{\cos h-1}{h}$ 两处，再回头证这两个极限，让他看到整个证明的关键就在这里。追问“如果用角度制，$\lim\frac{\sin\theta}{\theta}$ 还是 1 吗”，检验他是否理解弧度制的作用。（覆盖 1、2）
+- 💬 对话要点：先在 $\sin x$ 图像上逐点估切线斜率、描出 $f'$，看出这条曲线就是 $\cos x$。然后从定义出发，讲清推导卡在 $\frac{\sin h}{h}$ 和 $\frac{\cos h-1}{h}$ 两处，再回头证这两个极限（分别为 1 和 0），点明整个证明的关键就在这里。讲清用角度制时 $\lim\frac{\sin\theta}{\theta}=\frac{\pi}{180}$ 而不是 1，这正是微积分用弧度制的原因。（覆盖 1、2）
 - 🎬 MIT 18.01 第 2 讲：视频 [25:44–29:05](https://www.bilibili.com/video/BV1mNgm66EZu?p=2&t=1544)（讲义 `course/extracted/mit1801/L02/OCW_18.01_L02_讲义_中文.md`，摘要 `course/prep/mit1801-L02.md`）——只做预告：两个三角极限的陈述与“为什么”的悬念
 - 🎬 MIT 18.01 第 3 讲：视频 [02:19–11:00](https://www.bilibili.com/video/BV1mNgm66EZu?p=3&t=139)；讲义 Derivatives of sin x and cos x（讲义 `course/extracted/mit1801/L03/OCW_18.01_L03_讲义_中文.md`，摘要 `course/prep/mit1801-L03.md`）——标准 2（合角 + 两个特殊极限推 $\sin'=\cos$）；“A、B 就是零点导数、一点定全局”是斯图尔特没有的视角
 - 🎬 MIT 18.01 第 3 讲：视频 [11:00–25:55](https://www.bilibili.com/video/BV1mNgm66EZu?p=3&t=660)；L02 讲义图 fig12–fig15（讲义 `course/extracted/mit1801/L03/OCW_18.01_L03_讲义_中文.md`，摘要 `course/prep/mit1801-L03.md`）——标准 1 的“为什么要弧度制”部分；五个真实追问可作诊断题。注意不覆盖标准 1 要求的“不等式 + 夹逼”写法

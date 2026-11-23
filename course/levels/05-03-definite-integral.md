@@ -19,7 +19,7 @@ prereqs: [05-01]
 ## 学习路径
 - 📖 阅读：§5.2 p.384–391 `course/sources/stewart9/050 05 积分 - 5.02 定积分.pdf`（文字版 `course/extracted/050 05 积分 - 5.02 定积分.md`），重点 定义 2 与注 1–4 p.384–385、例 1 p.386（$R_6=-3.9375$）、例 2 p.387（极限 → 积分）、例 3 p.388–389（定义法算 $-6.75$）、例 5 p.390（几何法）、例 6 p.390–391（中点法则）（覆盖 1–4）
 - ✏️ 练习：§5.2 习题 p.394–397 第 1–4 题（黎曼和与净面积）、第 9–10 题（中点法则）、第 19–20 题（极限 → 积分）、第 23–26 题（定义法计算）、第 35–40 题（用面积或净面积求值）（覆盖 1–4）
-- 💬 对话要点：先指出 05-01、05-02 的面积和路程是同一种极限，现在给它起名字和记号；逐个对照 $\int\leftrightarrow\lim\sum$、$dx\leftrightarrow\Delta x$。让学习者手算例 3，体会“定义法很繁”，为 FTC 埋伏笔。检验净面积时问：“$\int_0^3(x^3-6x)dx$ 为负，说明了什么？”（覆盖 1、2、3）
+- 💬 对话要点：先指出 05-01、05-02 的面积和路程是同一种极限，现在给它起名字和记号；逐个对照 $\int\leftrightarrow\lim\sum$、$dx\leftrightarrow\Delta x$。带学习者手算例 3，体会“定义法很繁”，为 FTC 埋伏笔。讲完用 $\int_0^3(x^3-6x)dx$ 为负检验对净面积的理解（说明 $x$ 轴下方的面积比上方大）。（覆盖 1、2、3）
 - 🎬 MIT 18.01 第 16 讲：视频 [03:14–04:04](https://www.bilibili.com/video/BV1mNgm66EZu?p=16&t=194)+ [35:16–40:04](https://www.bilibili.com/video/BV1mNgm66EZu?p=16&t=2116)；讲义 Definition（讲义 `course/extracted/mit1801/L16/OCW_18.01_L16_讲义_中文.md`，摘要 `course/prep/mit1801-L16.md`）——标准 1、4；积分记号与黎曼和定义（注意：本讲只讲"面积"，净面积/负值留到 L17）
 - 🎬 MIT 18.01 第 16 讲：视频 [28:32–31:03](https://www.bilibili.com/video/BV1mNgm66EZu?p=16&t=1712)（讲义 `course/extracted/mit1801/L16/OCW_18.01_L16_讲义_中文.md`，摘要 `course/prep/mit1801-L16.md`）——标准 3（用三角形、矩形几何直接求积分）
 - 🎬 MIT 18.01 第 17 讲：视频 [11:52–15:36](https://www.bilibili.com/video/BV1mNgm66EZu?p=17&t=712)；讲义 Example 4、图 2（讲义 `course/extracted/mit1801/L17/OCW_18.01_L17_讲义_中文.md`，摘要 `course/prep/mit1801-L17.md`）——标准 1（净面积 = 上方减下方）
